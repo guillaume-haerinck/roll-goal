@@ -7,7 +7,7 @@ Votre but est de faire parcourir un chemin à une bille de métal sans la faire 
 ## Construit avec
 * [Unity](https://unity3d.com/fr) - Moteur de jeu
 
-## Autheurs
+## Auteurs
 
 * **Guillaume Haerinck** - Développeur C# - [Portfolio](http://guillaumehaerinck.com/)
 * **Alexandre Guilhen** - Artiste 3D
