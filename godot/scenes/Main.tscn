@@ -1,20 +1,20 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Player.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Camera.gd" type="Script" id=2]
-[ext_resource path="res://levels/Level-1.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scripts/Camera.gd" type="Script" id=2]
+[ext_resource path="res://scenes/levels/Level-1.tscn" type="PackedScene" id=3]
 
 [node name="Main" type="Spatial"]
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15501, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.14271, 0.450265, 0 )
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
 transform = Transform( -0.206293, -0.677877, -0.705639, 0, -0.72115, 0.692778, -0.97849, 0.142915, 0.148768, -6.85294, 5.66808, -1.88481 )
 shadow_enabled = true
 
 [node name="Camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.978612, 0.205717, 0, -0.205717, 0.978612, -0.188905, 1.88221, 3.82536 )
+transform = Transform( 1, 0, 0, 0, 0.837873, 0.545865, 0, -0.545865, 0.837873, 1.84371, 2.78848, 3.82536 )
 script = ExtResource( 2 )
 
 [node name="Level-1" parent="." instance=ExtResource( 3 )]

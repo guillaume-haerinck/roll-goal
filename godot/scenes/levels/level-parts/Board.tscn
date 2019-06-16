@@ -1,0 +1,89 @@
+[gd_scene load_steps=12 format=2]
+
+[sub_resource type="PlaneMesh" id=1]
+
+[sub_resource type="SpatialMaterial" id=7]
+albedo_color = Color( 0.945098, 0.67451, 0.360784, 1 )
+
+[sub_resource type="BoxShape" id=2]
+extents = Vector3( 3.03794, 0.0231915, 2.01068 )
+
+[sub_resource type="BoxShape" id=3]
+extents = Vector3( 3.031, 0.301481, 0.155293 )
+
+[sub_resource type="CubeMesh" id=4]
+
+[sub_resource type="SpatialMaterial" id=8]
+albedo_color = Color( 0.105882, 0.521569, 0.219608, 1 )
+
+[sub_resource type="SpatialMaterial" id=9]
+albedo_color = Color( 0.105882, 0.521569, 0.219608, 1 )
+
+[sub_resource type="BoxShape" id=5]
+extents = Vector3( 0.154033, 0.303279, 1.73001 )
+
+[sub_resource type="CubeMesh" id=6]
+
+[sub_resource type="SpatialMaterial" id=10]
+albedo_color = Color( 0.105882, 0.521569, 0.219608, 1 )
+
+[sub_resource type="SpatialMaterial" id=11]
+albedo_color = Color( 0.105882, 0.521569, 0.219608, 1 )
+
+[node name="Board" type="Spatial"]
+
+[node name="Ground" type="StaticBody" parent="."]
+
+[node name="GroundMesh" type="MeshInstance" parent="Ground"]
+transform = Transform( 3, 0, 0, 0, 1, 0, 0, 0, 2, 0, 0, 0 )
+mesh = SubResource( 1 )
+material/0 = SubResource( 7 )
+
+[node name="GroundCollision" type="CollisionShape" parent="Ground"]
+shape = SubResource( 2 )
+
+[node name="LongWall" type="StaticBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, -1.85425 )
+
+[node name="LongWallCollision" type="CollisionShape" parent="LongWall"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00123841, 0, 0 )
+shape = SubResource( 3 )
+
+[node name="LongWallMesh" type="MeshInstance" parent="LongWall"]
+transform = Transform( 3, 0, 0, 0, 0.3, 0, 0, 0, 0.15, 0, 0, 0 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 8 )
+
+[node name="LongWall2" type="StaticBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 1.86687 )
+
+[node name="LongWallCollision" type="CollisionShape" parent="LongWall2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00123841, 0, 0 )
+shape = SubResource( 3 )
+
+[node name="LongWallMesh" type="MeshInstance" parent="LongWall2"]
+transform = Transform( 3, 0, 0, 0, 0.3, 0, 0, 0, 0.15, 0, 0, 0 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 9 )
+
+[node name="ShortWall" type="StaticBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.85225, 0.3, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="ShortWall"]
+shape = SubResource( 5 )
+
+[node name="MeshInstance" type="MeshInstance" parent="ShortWall"]
+transform = Transform( 0.15, 0, 0, 0, 0.3, 0, 0, 0, 1.8, 0, 0, 0 )
+mesh = SubResource( 6 )
+material/0 = SubResource( 10 )
+
+[node name="ShortWall2" type="StaticBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.8453, 0.3, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="ShortWall2"]
+shape = SubResource( 5 )
+
+[node name="MeshInstance" type="MeshInstance" parent="ShortWall2"]
+transform = Transform( 0.15, 0, 0, 0, 0.3, 0, 0, 0, 1.8, 0, 0, 0 )
+mesh = SubResource( 6 )
+material/0 = SubResource( 11 )
