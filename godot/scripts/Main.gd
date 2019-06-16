@@ -20,4 +20,6 @@ func reset():
 	player.translation = $"Level-1/Start".translation
 	player.translation.y += 0.2
 	player.set_linear_velocity(Vector3.ZERO)
+	
+	$HUD.reset()
 	should_reset = false

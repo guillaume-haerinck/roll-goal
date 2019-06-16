@@ -13,5 +13,9 @@ func _on_Second_timeout():
 	timerLabel.text = str(remainingTime)
 
 func _ready():
+	reset()
+	
+func reset():
+	$Timer.start()
 	remainingTime = $Timer.wait_time
 	timerLabel.text = str(remainingTime)
