@@ -10,5 +10,5 @@ It has been made across multiple game engines :
 - Custom one (Using OpenGL and ECS architecture)
 
 <p align="center">
-<img src="https://github.com/guillaume-haerinck/roll-goal/blob/master/doc/rapport-img/roll-goal.jpg?raw=true" alt="Capture">
+<img src="https://github.com/guillaume-haerinck/roll-goal/blob/master/doc/readme-img/roll-goal.jpg?raw=true" alt="Capture">
 </p>
