@@ -7,8 +7,8 @@ It has been made across multiple game engines :
 Engine | Status
 --- | ---
 Unity | Gameplay works but to improve
-Unreal Engine | *Not started*
-Godot | Doing
+Unreal Engine | Template base
+Godot | Basic gameplay
 Custom (Using OpenGL and ECS architecture) | *Not started*
 
 <p align="center">
