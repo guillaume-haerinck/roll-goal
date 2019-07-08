@@ -1,0 +1,53 @@
+#include <stdio.h>
+#include <SDL2/SDL.h>
+#ifdef __EMSCRIPTEN__
+	#include <emscripten.h>
+#endif
+
+void gameLoop()
+{
+	SDL_Event e;
+	SDL_PumpEvents();
+	while (SDL_PollEvent(&e)) {
+		switch (e.type) {
+		case SDL_KEYDOWN:
+			printf("Key down ! \n");
+			break;
+		}
+	}
+}
+
+int main(int argc, char const *argv[])
+{
+	// Init SDL
+	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER) != 0)
+	{
+		printf("Cannot init SDL2");
+		return 1;
+	}
+	SDL_GL_LoadLibrary(NULL);
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
+	SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 16);
+	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_ES);
+	SDL_SetHint(SDL_HINT_RENDER_DRIVER, "opengl");
+	SDL_GL_SetSwapInterval(1);
+
+	SDL_Window *window = SDL_CreateWindow(
+		"Roll Goal",
+		SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
+		500, 500,
+		SDL_WINDOW_OPENGL);
+	if (window == nullptr)
+	{
+		printf("Cannot create window");
+		return 1;
+	}
+
+	emscripten_set_main_loop(gameLoop, 0, 0);
+
+	return 0;
+}
+
+
