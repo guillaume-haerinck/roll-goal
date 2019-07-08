@@ -13,6 +13,10 @@ void gameLoop()
 		case SDL_KEYDOWN:
 			printf("Key down ! \n");
 			break;
+
+		case SDL_MOUSEBUTTONDOWN:
+			printf("Button down ! \n");
+			break;
 		}
 	}
 }
@@ -22,12 +26,12 @@ int main(int argc, char const *argv[])
 	// Init SDL
 	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER) != 0)
 	{
-		printf("Cannot init SDL2");
+		printf("Cannot init SDL2 \n");
 		return 1;
 	}
 	SDL_GL_LoadLibrary(NULL);
-	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
-	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
+	// SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
 	SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 16);
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_ES);
@@ -41,9 +45,17 @@ int main(int argc, char const *argv[])
 		SDL_WINDOW_OPENGL);
 	if (window == nullptr)
 	{
-		printf("Cannot create window");
-		return 1;
+		printf("Cannot create window \n");
 	}
+
+	SDL_GLContext context = SDL_GL_CreateContext(window);
+    if (context == nullptr) {
+		printf("Context is null %s\n", SDL_GetError());
+    }
+
+	int version = 0;
+	SDL_GL_GetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, &version);
+	printf("%d", version);
 
 	emscripten_set_main_loop(gameLoop, 0, 0);
 
