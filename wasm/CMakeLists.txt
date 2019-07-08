@@ -1,5 +1,5 @@
 # NOT WORKING YET
-# em++ src/main.cpp -s USE_SDL=2 -o dist/index.html
+# em++ src/main.cpp -s USE_SDL=2 -s USE_WEBGL2=1 -o dist/index.html
 # emrun --port 8080 dist/index.html
 
 # Requirement
