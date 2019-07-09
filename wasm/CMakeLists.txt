@@ -32,6 +32,10 @@ file(GLOB_RECURSE MY_SOURCES src/*)
 find_package(OpenGL REQUIRED)
 find_package(SDL2 REQUIRED)
 
+# ------------------------- BUILD DEPENDENCIES IF NEEDED ---------------------
+
+add_library(GLAD STATIC "lib/glad/src/glad.c")
+
 # /////////////////////////////////////////////////////////////////////////////
 # ///////////////////////////////// INCLUDES //////////////////////////////////
 # /////////////////////////////////////////////////////////////////////////////
@@ -39,6 +43,7 @@ find_package(SDL2 REQUIRED)
 include_directories(
     ${OPENGL_INCLUDE_DIR}
     ${SDL2_INCLUDE_DIRS}
+    lib/glad/include
     lib
     src
 )
@@ -53,4 +58,6 @@ target_link_libraries(
     ${PROJECT_NAME}
     ${OPENGL_LIBRARIES}
     ${SDL2_LIBRARIES}
+    GLAD
+    -ldl
 )

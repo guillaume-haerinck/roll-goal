@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <SDL2/SDL.h>
+#include <glad/glad.h>
 #ifdef __EMSCRIPTEN__
 	#include <emscripten.h>
 #endif
@@ -48,7 +49,12 @@ int main(int argc, char const *argv[]) {
 	SDL_GLContext context = SDL_GL_CreateContext(window);
     if (context == nullptr) {
 		printf("Context is null %s\n", SDL_GetError());
-    }
+
+	}
+
+	if (!gladLoadGLES2Loader(SDL_GL_GetProcAddress)) {
+		printf("Glad not init ! \n");
+	}
 
 	#ifdef __EMSCRIPTEN__
 		emscripten_set_main_loop(gameLoop, 0, 0);
