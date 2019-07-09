@@ -20,7 +20,7 @@ void gameLoop() {
 	}
 }
 
-int main(int argc, char const *argv[]) {
+int main(int argc, char *argv[]) {
 	// Init SDL
 	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER) != 0)
 	{
