@@ -1,1 +1,5 @@
 build
+conanbuildinfo.* 
+conaninfo.txt
+CMakeFiles
+CMakeCache.txt

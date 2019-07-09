@@ -1,0 +1,26 @@
+{
+ "options": [
+  [
+   "sdl2:directx",
+   "True"
+  ],
+  [
+   "sdl2:iconv",
+   "False"
+  ],
+  [
+   "sdl2:sdl2main",
+   "True"
+  ],
+  [
+   "sdl2:shared",
+   "False"
+  ]
+ ],
+ "root": {
+  "name": null,
+  "version": null,
+  "user": null,
+  "channel": null
+ }
+}

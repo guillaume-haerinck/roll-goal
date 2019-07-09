@@ -1,0 +1,18 @@
+{
+ "profile": "[settings]\narch=x86_64\narch_build=x86_64\nbuild_type=Release\ncompiler=Visual Studio\ncompiler.runtime=MD\ncompiler.version=16\nos=Windows\nos_build=Windows\n[options]\n[build_requires]\n[env]\n",
+ "graph_lock": {
+  "nodes": {
+   "e191db27-a283-11e9-9d72-d05349b9b875": {
+    "pref": null,
+    "options": "sdl2:directx=True\nsdl2:iconv=False\nsdl2:sdl2main=True\nsdl2:shared=False",
+    "requires": {
+     "sdl2/2.0.9@bincrafters/stable#0": "e191db26-a283-11e9-8560-d05349b9b875"
+    }
+   },
+   "e191db26-a283-11e9-8560-d05349b9b875": {
+    "pref": "sdl2/2.0.9@bincrafters/stable#0:1207f517a702731f7bcbfd9d309d0b8237719e8f#0",
+    "options": "directx=True\niconv=False\nsdl2main=True\nshared=False"
+   }
+  }
+ }
+}

@@ -7,22 +7,18 @@
 # ///////////////////////////////// SETTINGS //////////////////////////////////
 # /////////////////////////////////////////////////////////////////////////////
 
+# Set Standards
 cmake_minimum_required(VERSION 2.8)
-set(CMAKE_CXX_STANDARD 14)
+project(roll-goal C CXX)
 
-# Build Options
-set(BUILD_AS_WASM false CACHE BOOL "Should built as web assembly ?")
-if (BUILD_AS_WASM)
-    set(EMSCRIPTEN "" CACHE FILEPATH "Filepath for emscripten compiler")
-    # set(CMAKE_C_COMPILER EMSCRIPTEN)
-    # set(CMAKE_CPP_COMPILER EMSCRIPTEN)
-endif()
+# Setup Conan
+include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
+conan_basic_setup()
 
 # /////////////////////////////////////////////////////////////////////////////
 # ////////////////////////////// PROJECT FILES ////////////////////////////////
 # /////////////////////////////////////////////////////////////////////////////
 
-project(roll-goal)
 file(GLOB_RECURSE MY_SOURCES src/*)
 
 # /////////////////////////////////////////////////////////////////////////////
@@ -30,7 +26,6 @@ file(GLOB_RECURSE MY_SOURCES src/*)
 # /////////////////////////////////////////////////////////////////////////////
 
 find_package(OpenGL REQUIRED)
-find_package(SDL2 REQUIRED)
 
 # ------------------------- BUILD DEPENDENCIES IF NEEDED ---------------------
 
@@ -42,7 +37,6 @@ add_library(GLAD STATIC "lib/glad/src/glad.c")
 
 include_directories(
     ${OPENGL_INCLUDE_DIR}
-    ${SDL2_INCLUDE_DIRS}
     lib/glad/include
     lib
     src
@@ -56,8 +50,7 @@ set(EXECUTABLE_OUTPUT_PATH bin/${CMAKE_BUILD_TYPE})
 add_executable(${PROJECT_NAME} ${MY_SOURCES})
 target_link_libraries(
     ${PROJECT_NAME}
+    ${CONAN_LIBS}
     ${OPENGL_LIBRARIES}
-    ${SDL2_LIBRARIES}
     GLAD
-    -ldl
 )
