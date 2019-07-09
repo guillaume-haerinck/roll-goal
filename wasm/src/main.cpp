@@ -4,10 +4,8 @@
 	#include <emscripten.h>
 #endif
 
-void gameLoop()
-{
+void gameLoop() {
 	SDL_Event e;
-	SDL_PumpEvents();
 	while (SDL_PollEvent(&e)) {
 		switch (e.type) {
 		case SDL_KEYDOWN:
@@ -21,8 +19,7 @@ void gameLoop()
 	}
 }
 
-int main(int argc, char const *argv[])
-{
+int main(int argc, char const *argv[]) {
 	// Init SDL
 	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER) != 0)
 	{
@@ -53,7 +50,13 @@ int main(int argc, char const *argv[])
 		printf("Context is null %s\n", SDL_GetError());
     }
 
-	emscripten_set_main_loop(gameLoop, 0, 0);
+	#ifdef __EMSCRIPTEN__
+		emscripten_set_main_loop(gameLoop, 0, 0);
+	#else
+	while (true) {
+		gameLoop();
+	}
+	#endif
 
 	return 0;
 }
