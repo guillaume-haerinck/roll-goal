@@ -9,7 +9,7 @@ class ConanHelloEmscripten(ConanFile):
     url = "https://github.com/guillaume-haerinck/roll-goal"
     homepage = "https://github.com/guillaume-haerinck/roll-goal"
     settings = {"os": ["Emscripten"]}
-    exports_sources = ["CMakeLists.txt"]
+    exports_sources = ["CMakeLists.txt", "src/*"]
     generators = ["cmake"]
 
     def _configure_cmake(self):

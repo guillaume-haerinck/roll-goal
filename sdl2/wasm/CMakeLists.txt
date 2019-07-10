@@ -4,9 +4,11 @@ project(roll-goal-wasm)
 include(conanbuildinfo.cmake)
 conan_basic_setup()
 
-file(GLOB_RECURSE MY_SOURCES ../src/*)
-
+file(GLOB_RECURSE MY_SOURCES src/*)
 add_executable(${PROJECT_NAME} ${MY_SOURCES})
+
+SET(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -s USE_SDL=2 -s USE_WEBGL2=1")
+
 target_link_libraries(${PROJECT_NAME} PRIVATE ${CONAN_LIBS})
 
 set_target_properties(${PROJECT_NAME} PROPERTIES
