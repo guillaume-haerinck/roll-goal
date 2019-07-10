@@ -9,7 +9,7 @@ Engine | Status
 Unity | Gameplay works but to improve
 Unreal Engine | Template base
 Godot | Basic gameplay
-Web Assembly in pure C++ (Using OpenGL ES3 and ECS architecture) | Just started
+SDL2 (Using OpenGL ES3 and ECS architecture) | Just started
 
 <p align="center">
 <img src="https://github.com/guillaume-haerinck/roll-goal/blob/master/doc/readme-img/roll-goal.jpg?raw=true" alt="Capture">

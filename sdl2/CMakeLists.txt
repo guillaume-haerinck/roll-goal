@@ -1,8 +1,3 @@
-# NOT WORKING YET
-# source /home/ghaerinck/git/emsdk/emsdk_env.sh
-# em++ src/main.cpp -s USE_SDL=2 -s USE_WEBGL2=1 -o dist/index.html
-# emrun --port 8080 dist/index.html
-
 # /////////////////////////////////////////////////////////////////////////////
 # ///////////////////////////////// SETTINGS //////////////////////////////////
 # /////////////////////////////////////////////////////////////////////////////
@@ -13,8 +8,10 @@ project(roll-goal C CXX)
 
 # Setup Conan
 if(NOT EXISTS "${CMAKE_BINARY_DIR}/conan.cmake")
-    message(STATUS "Downloading conan.cmake from https://github.com/conan-io/cmake-conan")
-    file(DOWNLOAD "https://raw.githubusercontent.com/conan-io/cmake-conan/v0.14/conan.cmake" "${CMAKE_BINARY_DIR}/conan.cmake")
+    message(STATUS "Downloading conan.cmake")
+    file(DOWNLOAD
+        "https://raw.githubusercontent.com/conan-io/cmake-conan/v0.14/conan.cmake"
+        "${CMAKE_BINARY_DIR}/conan.cmake")
 endif()
 include(${CMAKE_BINARY_DIR}/conan.cmake)
 conan_cmake_run(CONANFILE conanfile.txt BASIC_SETUP)
@@ -31,7 +28,7 @@ file(GLOB_RECURSE MY_SOURCES src/*)
 
 find_package(OpenGL REQUIRED)
 
-# ------------------------- BUILD DEPENDENCIES IF NEEDED ---------------------
+# ------------------------- BUILD DEPENDENCIES IF NEEDED ----------------------
 
 add_library(GLAD STATIC "lib/glad/src/glad.c")
 
