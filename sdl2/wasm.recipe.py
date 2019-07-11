@@ -1,13 +1,6 @@
 from conans import ConanFile, CMake
 
-class ConanHelloEmscripten(ConanFile):
-    name = "roll-goal-wasm"
-    version = "1.0"
-    description = "Allow to build the Rool Goal project as WebAssembly"
-    topics = ("conan", "emscripten", "js", "javascript")
-    license = "MIT"
-    url = "https://github.com/guillaume-haerinck/roll-goal"
-    homepage = "https://github.com/guillaume-haerinck/roll-goal"
+class RollGoalWasm(ConanFile):
     settings = {"os": ["Emscripten"]}
     exports_sources = ["CMakeLists.txt", "src/*"]
     generators = ["cmake"]

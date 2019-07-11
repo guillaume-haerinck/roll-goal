@@ -7,14 +7,20 @@ cmake_minimum_required(VERSION 2.8)
 project(roll-goal C CXX)
 
 # Setup Conan
-if(NOT EXISTS "${CMAKE_BINARY_DIR}/conan.cmake")
+if (EMSCRIPTEN)
+    include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
+    conan_basic_setup()
+    set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -s USE_SDL=2 -s USE_WEBGL2=1")
+else()
+    if(NOT EXISTS "${CMAKE_BINARY_DIR}/conan.cmake")
     message(STATUS "Downloading conan.cmake")
     file(DOWNLOAD
         "https://raw.githubusercontent.com/conan-io/cmake-conan/v0.14/conan.cmake"
         "${CMAKE_BINARY_DIR}/conan.cmake")
+    endif()
+    include(${CMAKE_BINARY_DIR}/conan.cmake)
+    conan_cmake_run(CONANFILE conanfile.txt BASIC_SETUP)
 endif()
-include(${CMAKE_BINARY_DIR}/conan.cmake)
-conan_cmake_run(CONANFILE conanfile.txt BASIC_SETUP)
 
 # /////////////////////////////////////////////////////////////////////////////
 # ////////////////////////////// PROJECT FILES ////////////////////////////////

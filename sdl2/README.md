@@ -35,4 +35,7 @@ Use the `CMakeTools` plugin, build with `f7` then run with `f5` (But be carefull
 
 ### Build as Web Assembly
 
-COMING SOON
+```bash
+conan install ./wasm.recipe.py --install-folder build -pr ./wasm.profile
+conan build ./wasm.recipe.py --build-folder build
+```
