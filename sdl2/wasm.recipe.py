@@ -2,7 +2,6 @@ from conans import ConanFile, CMake
 
 class RollGoalWasm(ConanFile):
     settings = {"os": ["Emscripten"]}
-    exports_sources = ["CMakeLists.txt", "src/*"]
     generators = ["cmake"]
 
     def _configure_cmake(self):
@@ -13,7 +12,3 @@ class RollGoalWasm(ConanFile):
     def build(self):
         cmake = self._configure_cmake()
         cmake.build()
-
-    def package(self):
-        cmake = self._configure_cmake()
-        cmake.install()
