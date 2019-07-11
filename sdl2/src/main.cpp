@@ -6,7 +6,14 @@
 	#include <emscripten.h>
 #endif
 
-void gameLoop() {
+struct position {
+	float x;
+	float y;
+};
+
+void gameLoop(void* window) {
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
 	SDL_Event e;
 	while (SDL_PollEvent(&e)) {
 		switch (e.type) {
@@ -19,6 +26,8 @@ void gameLoop() {
 			break;
 		}
 	}
+
+	SDL_GL_SwapWindow((SDL_Window*) window);
 }
 
 int main(int argc, char *argv[]) {
@@ -59,12 +68,23 @@ int main(int argc, char *argv[]) {
 
 	// Test entt
 	entt::registry registry;
+	auto myentity = registry.create();
+
+	registry.assign<position>(myentity, 0.0f, 0.0f);
+	registry.view<position>().each([](auto& pos) {
+		printf("Position x : %f \n", pos.x);
+		pos.x += 5;
+		printf("Position x : %f \n", pos.x);
+	});
+
+	// Test opengl
+	glClearColor(1, 0, 0, 1);
 
 	#ifdef __EMSCRIPTEN__
-		emscripten_set_main_loop(gameLoop, 0, 0);
+		emscripten_set_main_loop_arg(gameLoop, (void *) window, 0, 0);
 	#else
 	while (true) {
-		gameLoop();
+		gameLoop(window);
 	}
 	#endif
 
