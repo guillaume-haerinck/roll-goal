@@ -5,12 +5,13 @@
 # Set Standards
 cmake_minimum_required(VERSION 2.8)
 project(roll-goal C CXX)
+set(CMAKE_CXX_STANDARD 17)
 
 # Setup Conan
 if (EMSCRIPTEN)
     include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
     conan_basic_setup()
-    set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -s USE_SDL=2 -s USE_WEBGL2=1")
+    set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -s USE_SDL=2 -s USE_WEBGL2=1 -std=c++17")
 else()
     if(NOT EXISTS "${CMAKE_BINARY_DIR}/conan.cmake")
     message(STATUS "Downloading conan.cmake")
@@ -61,3 +62,7 @@ target_link_libraries(
     ${OPENGL_LIBRARIES}
     GLAD
 )
+
+if (UNIX) # Use dynamic linking library
+    target_link_libraries(${PROJECT_NAME} -ldl)
+endif()

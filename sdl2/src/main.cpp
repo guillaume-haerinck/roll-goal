@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <SDL2/SDL.h>
 #include <glad/glad.h>
+#include <entt/entt.hpp>
 #ifdef __EMSCRIPTEN__
 	#include <emscripten.h>
 #endif
@@ -55,6 +56,9 @@ int main(int argc, char *argv[]) {
 	if (!gladLoadGLES2Loader(SDL_GL_GetProcAddress)) {
 		printf("Glad not init ! \n");
 	}
+
+	// Test entt
+	entt::registry registry;
 
 	#ifdef __EMSCRIPTEN__
 		emscripten_set_main_loop(gameLoop, 0, 0);

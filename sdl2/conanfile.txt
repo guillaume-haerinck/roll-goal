@@ -1,5 +1,6 @@
 [requires]
 sdl2/2.0.9@bincrafters/stable
+entt/3.x.y-WIP@skypjack/stable
 
 [generators]
 cmake
