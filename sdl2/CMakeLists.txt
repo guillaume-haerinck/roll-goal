@@ -20,7 +20,7 @@ else()
         "${CMAKE_BINARY_DIR}/conan.cmake")
     endif()
     include(${CMAKE_BINARY_DIR}/conan.cmake)
-    conan_cmake_run(CONANFILE conanfile.txt BASIC_SETUP)
+    conan_cmake_run(CONANFILE conanfile.txt BASIC_SETUP BUILD missing)
 endif()
 
 # /////////////////////////////////////////////////////////////////////////////

@@ -58,7 +58,7 @@ int main(int argc, char *argv[]) {
 	}
 
 	// Test entt
-	entt::registry<unsigned int> registry;
+	entt::registry registry;
 
 	#ifdef __EMSCRIPTEN__
 		emscripten_set_main_loop(gameLoop, 0, 0);

@@ -37,10 +37,10 @@ Use the `CMakeTools` plugin, build with `f7` then run with `f5` (But be carefull
 
 This project support Web Assembly, so it can run in a browser like Google Chrome or Firefox !
 
-The build steps are the same for any platform :
+The build steps are the same for any platform (you just need to delete the build folder if it already exist) :
 
 ```bash
-conan install ./wasm.recipe.py --install-folder build -pr ./wasm.profile
+conan install ./wasm.recipe.py --build missing --install-folder build -pr ./wasm.profile
 conan build ./wasm.recipe.py --build-folder build
 ```
 
