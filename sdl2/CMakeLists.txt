@@ -73,7 +73,7 @@ endif()
 # /////////////////////////////////////////////////////////////////////////////
 
 if (NOT EMSCRIPTEN)
-    list(REMOVE_ITEM MY_SOURCES "main.cpp")
+    list(REMOVE_ITEM MY_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp)
     file(GLOB_RECURSE MY_TESTS test/*)
     add_executable(TEST_ROLL_GOAL ${MY_SOURCES} ${MY_TESTS})
     target_link_libraries(

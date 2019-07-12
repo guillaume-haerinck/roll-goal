@@ -12,7 +12,6 @@ install:
 
 script:
   - cd sdl2
-  - conan install .
-  - cmake .
+  - cmake . -DCMAKE_BUILD_TYPE=Release
   - cmake --build .
   - ctest .
