@@ -17,7 +17,7 @@ matrix:
 
 before_install:
   - eval "${MATRIX_EVAL}"
-  - sudo apt-get install -y mesa-common-dev
+  - sudo apt-get install -y libglu1-mesa-dev mesa-common-dev
 
 install:
   - pip install conan
