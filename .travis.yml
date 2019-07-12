@@ -9,10 +9,10 @@ compiler:
 install:
   - pip install conan
   - conan user
+  - conan remote add bincrafters https://api.bintray.com/conan/bincrafters/public-conan
 
 script:
   - cd sdl2
-  - conan install .
   - cmake .
   - cmake --build .
   - ctest .
