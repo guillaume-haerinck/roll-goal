@@ -1,0 +1,18 @@
+os: linux
+language: python
+python: "3.7"
+dist: xenial
+
+compiler:
+  - gcc
+
+install:
+  - pip install conan
+  - conan user
+
+script:
+  - cd sdl2
+  - conan install .
+  - cmake .
+  - cmake --build .
+  - ctest .

@@ -6,6 +6,7 @@
 cmake_minimum_required(VERSION 3.10)
 project(roll-goal C CXX)
 set(CMAKE_CXX_STANDARD 17)
+set(default_build_type "Release")
 
 # Setup Conan
 if (EMSCRIPTEN)
@@ -21,11 +22,6 @@ else()
     endif()
     include(${CMAKE_BINARY_DIR}/conan.cmake)
     conan_cmake_run(CONANFILE conanfile.txt BASIC_SETUP BUILD missing)
-endif()
-
-# Set build type
-if (NOT CMAKE_BUILD_TYPE)
-    set(CMAKE_BUILD_TYPE Debug)
 endif()
 
 # /////////////////////////////////////////////////////////////////////////////
@@ -77,7 +73,7 @@ endif()
 # /////////////////////////////////////////////////////////////////////////////
 
 if (NOT EMSCRIPTEN)
-    list(REMOVE_ITEM ${MY_SOURCES} "main.cpp")
+    list(REMOVE_ITEM MY_SOURCES "main.cpp")
     file(GLOB_RECURSE MY_TESTS test/*)
     add_executable(TEST_ROLL_GOAL ${MY_SOURCES} ${MY_TESTS})
     target_link_libraries(

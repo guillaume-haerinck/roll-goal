@@ -14,7 +14,9 @@ conan remote add bincrafters https://api.bintray.com/conan/bincrafters/public-co
 
 ### Build for your machine
 
-You can handle the `CMakeLists.txt` in any way you like, it will download the dependecies by itself. Here's some way to use it :
+You can handle the `CMakeLists.txt` in any way you like, it will download the dependecies by itself. 
+
+Here's some way to use it :
 
 #### `Option 1: Bash (Linux only)`
 
@@ -44,7 +46,7 @@ conan install ./wasm.recipe.py --build missing --install-folder wasm -pr ./wasm.
 conan build ./wasm.recipe.py --build-folder wasm
 ```
 
-You can then copy the files inside `build/bin` into `www` and run this folder with a simple web-server. You can easily create one with python on your shell with :
+You can then copy the files inside `wasm/bin` into `www` and run this folder with a simple web-server. You can easily create one with python on your shell :
 
 ```bash
 python -m http.server --directory www --bind 127.0.0.1
