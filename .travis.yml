@@ -13,6 +13,6 @@ install:
 
 script:
   - cd sdl2
-  - cmake .
+  - cmake . -DCMAKE_BUILD_TYPE=Release
   - cmake --build .
   - ctest .
