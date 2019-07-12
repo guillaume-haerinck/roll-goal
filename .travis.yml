@@ -6,6 +6,9 @@ dist: xenial
 compiler:
   - gcc
 
+before_install:
+  - sudo apt-get install -y build-essential libsdl2-dev libglu1-mesa-dev mesa-common-dev
+
 install:
   - pip install conan
   - conan user
