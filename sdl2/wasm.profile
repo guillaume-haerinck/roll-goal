@@ -4,7 +4,7 @@ include(default)
 os=Emscripten
 arch=wasm
 compiler=clang
-compiler.version=8
+compiler.version=6.0
 compiler.libcxx=libc++
 compiler.cppstd=17
 

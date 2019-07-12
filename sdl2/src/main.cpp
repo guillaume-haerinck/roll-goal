@@ -2,6 +2,7 @@
 #include <SDL2/SDL.h>
 #include <glad/glad.h>
 #include <entt/entt.hpp>
+#include <spdlog/spdlog.h>
 #ifdef __EMSCRIPTEN__
 	#include <emscripten.h>
 #endif
@@ -31,6 +32,8 @@ void gameLoop(void* window) {
 }
 
 int main(int argc, char *argv[]) {
+	spdlog::info("It works");
+
 	// Init SDL
 	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER) != 0)
 	{
