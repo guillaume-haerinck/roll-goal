@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/guillaume-haerinck/roll-goal.svg?branch=master)](https://travis-ci.org/guillaume-haerinck/roll-goal)
+
 # Roll Goal
 
 A small game where you have to move a ball across each levels without ever touching the ground. Based on the [mini-game](https://zelda.gamepedia.com/Rollgoal) in The legend of Zelda : Twilight Princess.
