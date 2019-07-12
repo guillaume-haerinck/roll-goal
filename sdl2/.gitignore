@@ -1,8 +1,15 @@
+# Temp cmake
+CMakeCache.txt
+
+# Build folders
 build
 out
+wasm
 CMakeFiles
-CMakeCache.txt
+
+# Vscode
 c_cpp_properties.json
+settings.json
 
 # Conan
 conanbuildinfo.* 

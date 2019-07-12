@@ -2,8 +2,8 @@
 # ///////////////////////////////// SETTINGS //////////////////////////////////
 # /////////////////////////////////////////////////////////////////////////////
 
-# Set Standards
-cmake_minimum_required(VERSION 2.8)
+# Set standards
+cmake_minimum_required(VERSION 3.10)
 project(roll-goal C CXX)
 set(CMAKE_CXX_STANDARD 17)
 
@@ -21,6 +21,11 @@ else()
     endif()
     include(${CMAKE_BINARY_DIR}/conan.cmake)
     conan_cmake_run(CONANFILE conanfile.txt BASIC_SETUP BUILD missing)
+endif()
+
+# Set build type
+if (NOT CMAKE_BUILD_TYPE)
+    set(CMAKE_BUILD_TYPE Debug)
 endif()
 
 # /////////////////////////////////////////////////////////////////////////////
@@ -65,4 +70,25 @@ target_link_libraries(
 
 if (UNIX) # Use dynamic linking library
     target_link_libraries(${PROJECT_NAME} -ldl)
+endif()
+
+# /////////////////////////////////////////////////////////////////////////////
+# ///////////////////////////////// TESTING ///////////////////////////////////
+# /////////////////////////////////////////////////////////////////////////////
+
+if (NOT EMSCRIPTEN)
+    list(REMOVE_ITEM ${MY_SOURCES} "main.cpp")
+    file(GLOB_RECURSE MY_TESTS test/*)
+    add_executable(TEST_ROLL_GOAL ${MY_SOURCES} ${MY_TESTS})
+    target_link_libraries(
+        TEST_ROLL_GOAL
+        ${CONAN_LIBS}
+        ${OPENGL_LIBRARIES}
+        GLAD
+    )
+
+    # Make the test discoverable by CTest
+    enable_testing()
+    include(GoogleTest)
+    gtest_discover_tests(TEST_ROLL_GOAL ${MY_TESTS})
 endif()

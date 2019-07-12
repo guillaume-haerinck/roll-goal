@@ -16,6 +16,17 @@
             "externalConsole": true
         },
         {
+            "name": "(Windows) Test",
+            "type": "cppvsdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/bin/TEST_ROLL_GOAL.exe",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false
+        },
+        {
             "name": "(Linux) Launch",
             "type": "cppdbg",
             "request": "launch",

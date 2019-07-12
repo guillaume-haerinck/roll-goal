@@ -40,8 +40,8 @@ This project support Web Assembly, so it can run in a browser like Google Chrome
 The build steps are the same for any platform (you just need to delete the build folder if it already exist) :
 
 ```bash
-conan install ./wasm.recipe.py --build missing --install-folder build -pr ./wasm.profile
-conan build ./wasm.recipe.py --build-folder build
+conan install ./wasm.recipe.py --build missing --install-folder wasm -pr ./wasm.profile
+conan build ./wasm.recipe.py --build-folder wasm
 ```
 
 You can then copy the files inside `build/bin` into `www` and run this folder with a simple web-server. You can easily create one with python on your shell with :
@@ -51,3 +51,7 @@ python -m http.server --directory www --bind 127.0.0.1
 ```
 
 Then open [your local server](http://127.0.0.1:8000/) to see the project.
+
+## Running test
+
+The test target is build by default. To run it, you can launch the `TEST_ROLL_GOAL` executable next to the project, or you can go to the build folder, and run the CMake test utility with `ctest .`
