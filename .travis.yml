@@ -21,14 +21,18 @@ install:
   - conan user
   - conan remote add bincrafters https://api.bintray.com/conan/bincrafters/public-conan
   - export CXX=${COMPILER}
-  - ${CXX} --version
 
-script:
-  - cd sdl2
-  - cmake . -DCMAKE_BUILD_TYPE=Release
-  - cmake --build .
-  - ctest .
-  - ls
-  - rm CMakeCache.txt
-  - conan install ./wasm.recipe.py --build missing --install-folder wasm -pr ./wasm.profile
-  - conan build ./wasm.recipe.py --build-folder wasm
+jobs:
+  include:
+    - stage: sdl
+      script:
+        - cd sdl2
+        - cmake . -DCMAKE_BUILD_TYPE=Release
+        - cmake --build .
+    - stage: test
+      script: ctest .
+    - stage: wasm
+      script:
+        - rm CMakeCache.txt
+        - conan install ./wasm.recipe.py --build missing --install-folder wasm -pr ./wasm.profile
+        - conan build ./wasm.recipe.py --build-folder wasm
