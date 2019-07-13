@@ -39,6 +39,8 @@ find_package(OpenGL REQUIRED)
 # ------------------------- BUILD DEPENDENCIES IF NEEDED ----------------------
 
 add_library(GLAD STATIC "lib/glad/src/glad.c")
+add_library(STB_IMAGE STATIC "lib/stb_image/stb_image.cpp")
+add_library(IMGUI STATIC "lib/imgui/imgui_impl_opengl3.cpp" "lib/imgui/imgui_impl_sdl.cpp")
 
 # /////////////////////////////////////////////////////////////////////////////
 # ///////////////////////////////// INCLUDES //////////////////////////////////
@@ -62,6 +64,8 @@ target_link_libraries(
     ${CONAN_LIBS}
     ${OPENGL_LIBRARIES}
     GLAD
+    STB_IMAGE
+    IMGUI
 )
 
 if (UNIX) # Use dynamic linking library
@@ -81,6 +85,8 @@ if (NOT EMSCRIPTEN)
         ${CONAN_LIBS}
         ${OPENGL_LIBRARIES}
         GLAD
+        STB_IMAGE
+        IMGUI
     )
 
     # Make the test discoverable by CTest

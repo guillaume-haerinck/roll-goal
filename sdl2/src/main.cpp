@@ -3,6 +3,10 @@
 #include <glad/glad.h>
 #include <entt/entt.hpp>
 #include <spdlog/spdlog.h>
+#include <debug_break/debug_break.h>
+#include <imgui.h>
+#include <imgui/imgui_impl_sdl.h>
+#include <imgui/imgui_impl_opengl3.h>
 #ifdef __EMSCRIPTEN__
 	#include <emscripten.h>
 #endif
@@ -14,6 +18,18 @@ struct position {
 
 void gameLoop(void* window) {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+/* 
+	ImGui_ImplOpenGL3_NewFrame();
+	ImGui_ImplSDL2_NewFrame((SDL_Window*) window);
+	ImGui::NewFrame();
+	ImGui::Begin("Main debug window");
+	ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+	ImGui::End();
+
+	ImGui::Render();
+	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+*/
 
 	SDL_Event e;
 	while (SDL_PollEvent(&e)) {
@@ -62,12 +78,21 @@ int main(int argc, char *argv[]) {
 	SDL_GLContext context = SDL_GL_CreateContext(window);
     if (context == nullptr) {
 		printf("Context is null %s\n", SDL_GetError());
-
 	}
 
 	if (!gladLoadGLES2Loader(SDL_GL_GetProcAddress)) {
 		printf("Glad not init ! \n");
+		debug_break();
 	}
+
+	// ImGui
+    IMGUI_CHECKVERSION();
+	ImGui::CreateContext();
+	ImGuiIO& io = ImGui::GetIO(); (void)io;
+	io.ConfigFlags |= ImGuiConfigFlags_NoMouseCursorChange;
+    ImGui_ImplSDL2_InitForOpenGL(window, context);
+	ImGui_ImplOpenGL3_Init("#version 300 es");
+	ImGui::StyleColorsDark();
 
 	// Test entt
 	entt::registry registry;
