@@ -39,17 +39,19 @@ Use the `CMakeTools` plugin, build with `f7` then run with `f5` (But be carefull
 
 This project support Web Assembly, so it can run in a browser like Google Chrome or Firefox !
 
-The build steps are the same for any platform (you just need to delete the build folder if it already exist) :
+The build steps are the same for any platform (however it seems broken for now on Windows). Do not forget to delete `CMakeCache.txt` if there is one on the folder.
 
 ```bash
 conan install ./wasm.recipe.py --build missing --install-folder wasm -pr ./wasm.profile
 conan build ./wasm.recipe.py --build-folder wasm
 ```
 
-You can then copy the files inside `wasm/bin` into `www` and run this folder with a simple web-server. You can easily create one with python on your shell :
+You can then copy the files inside `wasm/bin` into `www` and run this folder with a simple web-server. On this exemple, we are creating a simple one with python :
 
 ```bash
-python -m http.server --directory www --bind 127.0.0.1
+cp -a wasm/bin/. www
+cd www
+python3 -m http.server -b 127.0.0.1
 ```
 
 Then open [your local server](http://127.0.0.1:8000/) to see the project.
