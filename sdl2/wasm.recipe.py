@@ -6,8 +6,9 @@ class RollGoalWasm(ConanFile):
       "glm/0.9.8.5@bincrafters/stable", 
       "spdlog/1.3.1@bincrafters/stable",
       "imgui/1.69@bincrafters/stable",
-      "bullet3/2.88@bincrafters/stable"]
-    generators = ["cmake"]
+      "bullet3/2.88@bincrafters/stable",
+      "Assimp/4.1.0@jacmoe/stable"]
+    generators = ["cmake", "txt"]
 
     def _configure_cmake(self):
       cmake = CMake(self)
