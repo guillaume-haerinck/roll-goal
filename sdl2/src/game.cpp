@@ -9,7 +9,8 @@
 
 bool Game::m_instanciated = false;
 
-Game::Game() {
+Game::Game() : m_running(true)
+{
     assert(!m_instanciated);
 	m_instanciated = true;
 
@@ -76,3 +77,5 @@ Game::~Game() {
 /////////////////////////////////////////////////////////////////////////////
 
 SDL_Window* Game::getWindow() const { return m_window; }
+bool Game::isRunning() const { return m_running; }
+void Game::exit() { m_running = false; }

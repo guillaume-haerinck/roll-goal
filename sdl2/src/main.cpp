@@ -8,18 +8,26 @@
 #ifdef __EMSCRIPTEN__
 	#include <emscripten.h>
 #endif
+#ifdef _WIN32
+	#define _CRTDBG_MAP_ALLOC
+	#include <crtdbg.h>
+#endif
 
 #include "game.h"
 
 void gameLoop(void* data);
 
 int main(int argc, char *argv[]) {
+	#ifdef _WIN32 // Check memory leaks
+		_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+	#endif
+
 	Game* game = new Game();
 
 	#ifdef __EMSCRIPTEN__
 		emscripten_set_main_loop_arg(gameLoop, (void *) game, 0, 0);
 	#else
-		while (true) {
+		while (game->isRunning()) {
 			gameLoop((void *) game);
 		}
 	#endif
@@ -49,6 +57,10 @@ void gameLoop(void* data) {
 	SDL_Event e;
 	while (SDL_PollEvent(&e)) {
 		switch (e.type) {
+		case SDL_QUIT:
+			game->exit();
+			break;
+
 		case SDL_KEYDOWN:
 			spdlog::info("Key down");
 			break;

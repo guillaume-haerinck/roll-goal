@@ -9,9 +9,12 @@ public:
 
 public:
     SDL_Window* getWindow() const;
+    bool isRunning() const;
+    void exit();
 
 private:
     SDL_Window* m_window;
     SDL_GLContext m_context;
     static bool m_instanciated;
+    bool m_running;
 };
