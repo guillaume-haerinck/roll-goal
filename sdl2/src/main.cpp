@@ -19,7 +19,6 @@ struct position {
 void gameLoop(void* window) {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-/* 
 	ImGui_ImplOpenGL3_NewFrame();
 	ImGui_ImplSDL2_NewFrame((SDL_Window*) window);
 	ImGui::NewFrame();
@@ -29,7 +28,6 @@ void gameLoop(void* window) {
 
 	ImGui::Render();
 	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-*/
 
 	SDL_Event e;
 	while (SDL_PollEvent(&e)) {
@@ -78,6 +76,7 @@ int main(int argc, char *argv[]) {
 	SDL_GLContext context = SDL_GL_CreateContext(window);
     if (context == nullptr) {
 		printf("Context is null %s\n", SDL_GetError());
+		debug_break();
 	}
 
 	if (!gladLoadGLES2Loader(SDL_GL_GetProcAddress)) {
