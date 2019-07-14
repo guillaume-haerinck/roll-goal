@@ -8,9 +8,23 @@ class FStatesManager : public testing::Test {
 		StatesManager statesManager;
 };
 
-TEST_F(FStatesManager, Push_ShouldBeActiveState) {
+TEST_F(FStatesManager, isEmpty) {
+	EXPECT_EQ(statesManager.isEmpty(), true);
+
 	statesManager.push(GameState::LEVEL);
-	IState* activeState = statesManager.getActiveState();
+	EXPECT_EQ(statesManager.isEmpty(), false);
+}
+
+TEST_F(FStatesManager, Push_LastPushShouldBeActiveState) {
+	statesManager.push(GameState::LEVEL);
+	std::shared_ptr<IState> activeState = statesManager.getActiveState();
 	ASSERT_FALSE(activeState == nullptr);
 	EXPECT_EQ(activeState->getName(), GameState::LEVEL);
+
+	/*
+	statesManager.push(GameState::TITLE_SCREEN);
+	activeState = statesManager.getActiveState();
+	ASSERT_FALSE(activeState == nullptr);
+	EXPECT_EQ(activeState->getName(), GameState::TITLE_SCREEN);
+	*/
 }

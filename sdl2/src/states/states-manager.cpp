@@ -4,11 +4,10 @@
 
 StatesManager::StatesManager() {
     m_states.fill(nullptr);
-    m_states.at(LEVEL) = new LevelState();
+    m_states.at(LEVEL) = std::make_shared<LevelState>();
 }
 
-StatesManager::~StatesManager()
-{
+StatesManager::~StatesManager() {
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -20,12 +19,10 @@ void StatesManager::push(GameState state) {
     m_stateStack.push(m_states.at(state));
 }
 
-void StatesManager::pop()
-{
+void StatesManager::pop() {
 }
 
-void StatesManager::update()
-{
+void StatesManager::update() {
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -33,10 +30,10 @@ void StatesManager::update()
 /////////////////////////////////////////////////////////////////////////////
 
 
-IState *StatesManager::getActiveState() const {
+std::shared_ptr<IState> StatesManager::getActiveState() const {
     return m_stateStack.top();
 }
 
-bool StatesManager::isEmpty() const
-{
+bool StatesManager::isEmpty() const {
+	return (m_stateStack.size() == 0) ? true : false;
 }

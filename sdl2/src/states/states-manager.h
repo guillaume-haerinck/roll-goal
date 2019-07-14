@@ -36,11 +36,11 @@ public:
     void update();
 
 public:
-    IState* getActiveState() const;
+	std::shared_ptr<IState> getActiveState() const;
     bool isEmpty() const;
 
 private:
     entt::registry m_registry;
-    std::array<IState*, 3> m_states;
-    std::stack<IState*> m_stateStack;
+    std::array<std::shared_ptr<IState>, 3> m_states;
+    std::stack<std::shared_ptr<IState>> m_stateStack;
 };
