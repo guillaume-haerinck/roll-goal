@@ -14,10 +14,35 @@ Game::Game() : m_running(true)
     assert(!m_instanciated);
 	m_instanciated = true;
 
-    // Init logger
     spdlog::set_pattern("[%l] %^ %v %$");
 
-    // Init SDL
+	initSDL();
+    initImgui();
+}
+
+Game::~Game() {
+    ImGui_ImplOpenGL3_Shutdown();
+	ImGui_ImplSDL2_Shutdown();
+	ImGui::DestroyContext();
+    SDL_DestroyWindow(m_window);
+	SDL_Quit();
+}
+
+/////////////////////////////////////////////////////////////////////////////
+////////////////////////////// PUBLIC METHODS ///////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
+
+
+void Game::update() {
+	
+}
+
+/////////////////////////////////////////////////////////////////////////////
+///////////////////////////// PRIVATE METHODS ///////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
+
+
+void Game::initSDL() {
 	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER) != 0)
 	{
 		spdlog::critical("[SDL2] Unable to initialize SDL: {}", SDL_GetError());
@@ -53,23 +78,14 @@ Game::Game() : m_running(true)
 		spdlog::critical("[Glad] Glad not init");
 		debug_break();
 	}
+}
 
-	// ImGui
-    IMGUI_CHECKVERSION();
+void Game::initImgui() const {
+	IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
-	ImGuiIO& io = ImGui::GetIO(); (void)io;
-	io.ConfigFlags |= ImGuiConfigFlags_NoMouseCursorChange;
     ImGui_ImplSDL2_InitForOpenGL(m_window, m_context);
 	ImGui_ImplOpenGL3_Init("#version 300 es");
 	ImGui::StyleColorsDark();
-}
-
-Game::~Game() {
-    ImGui_ImplOpenGL3_Shutdown();
-	ImGui_ImplSDL2_Shutdown();
-	ImGui::DestroyContext();
-    SDL_DestroyWindow(m_window);
-	SDL_Quit();
 }
 
 /////////////////////////////////////////////////////////////////////////////

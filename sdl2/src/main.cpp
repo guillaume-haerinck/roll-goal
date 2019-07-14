@@ -40,6 +40,8 @@ void gameLoop(void* data) {
 	Game* game = static_cast<Game*>(data);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+	game->update();
+
 	{
 		ImGui_ImplOpenGL3_NewFrame();
 		ImGui_ImplSDL2_NewFrame(game->getWindow());
