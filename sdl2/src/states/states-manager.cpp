@@ -1,15 +1,23 @@
 #include "states-manager.h"
 
-StatesManager::StatesManager(/* args */)
-{
+#include "level-state.h"
+
+StatesManager::StatesManager() {
+    m_states.fill(nullptr);
+    m_states.at(LEVEL) = new LevelState();
 }
 
 StatesManager::~StatesManager()
 {
 }
 
-void StatesManager::push(GameState state)
-{
+/////////////////////////////////////////////////////////////////////////////
+////////////////////////////// PUBLIC METHODS ///////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
+
+
+void StatesManager::push(GameState state) {
+    m_stateStack.push(m_states.at(state));
 }
 
 void StatesManager::pop()
@@ -20,9 +28,13 @@ void StatesManager::update()
 {
 }
 
-IState *StatesManager::getActiveState() const
-{
-    return nullptr;
+/////////////////////////////////////////////////////////////////////////////
+//////////////////////////// GETTERS & SETTERS //////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
+
+
+IState *StatesManager::getActiveState() const {
+    return m_stateStack.top();
 }
 
 bool StatesManager::isEmpty() const

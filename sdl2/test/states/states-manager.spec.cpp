@@ -9,8 +9,8 @@ class FStatesManager : public testing::Test {
 };
 
 TEST_F(FStatesManager, Push_ShouldBeActiveState) {
-	statesManager.push(GameState::TITLE_SCREEN);
+	statesManager.push(GameState::LEVEL);
 	IState* activeState = statesManager.getActiveState();
 	ASSERT_FALSE(activeState == nullptr);
-	EXPECT_EQ(activeState->getName(), GameState::TITLE_SCREEN);
+	EXPECT_EQ(activeState->getName(), GameState::LEVEL);
 }

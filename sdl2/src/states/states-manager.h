@@ -2,7 +2,8 @@
 
 #include <entt/entt.hpp>
 #include <array>
-#include <vector>
+#include <stack>
+#include <memory>
 
 #include "i-state.h"
 
@@ -41,5 +42,5 @@ public:
 private:
     entt::registry m_registry;
     std::array<IState*, 3> m_states;
-    std::vector<IState*> m_stateStack;
+    std::stack<IState*> m_stateStack;
 };
