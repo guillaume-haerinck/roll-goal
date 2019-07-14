@@ -11,8 +11,16 @@ enum GameState {
 };
 
 /**
+ * @brief Describe the step the state is currently in
+ */
+enum class LifeCycle {
+	HAS_ENTERED,
+	HAS_UPDATED,
+	HAS_EXITED
+};
+
+/**
  * @brief Common interface for every state of the game
- * 
  */
 class IState {
 public:
@@ -21,5 +29,9 @@ public:
     virtual void onExit() = 0;
 
 public:
-    virtual GameState getName() const = 0; 
+    virtual GameState getName() const = 0;
+	LifeCycle getLifeCycle() { return m_lifeCycle; };
+
+protected:
+	LifeCycle m_lifeCycle;
 };

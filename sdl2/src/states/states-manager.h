@@ -16,7 +16,6 @@
 class StatesManager {
 public:
     StatesManager();
-    ~StatesManager();
 
     /**
      * @brief Add a state on top of the stack

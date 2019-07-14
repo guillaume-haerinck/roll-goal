@@ -1,13 +1,14 @@
 #include "states-manager.h"
 
 #include "level-state.h"
+#include "title-screen-state.h"
+#include "game-over-state.h"
 
 StatesManager::StatesManager() {
     m_states.fill(nullptr);
-    m_states.at(LEVEL) = std::make_shared<LevelState>();
-}
-
-StatesManager::~StatesManager() {
+	m_states.at(GameState::TITLE_SCREEN) = std::make_shared<TitleScreenState>();
+    m_states.at(GameState::LEVEL) = std::make_shared<LevelState>();
+	m_states.at(GameState::GAME_OVER) = std::make_shared<GameOverState>();
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -16,13 +17,23 @@ StatesManager::~StatesManager() {
 
 
 void StatesManager::push(GameState state) {
+	if (!isEmpty()) {
+		m_stateStack.top()->onExit();
+	}
     m_stateStack.push(m_states.at(state));
+	m_stateStack.top()->onEnter();
 }
 
 void StatesManager::pop() {
+	if (m_stateStack.size() > 1) {
+		m_stateStack.top()->onExit();
+		m_stateStack.pop();
+		m_stateStack.top()->onEnter();
+	}
 }
 
 void StatesManager::update() {
+	m_stateStack.top()->update();
 }
 
 /////////////////////////////////////////////////////////////////////////////

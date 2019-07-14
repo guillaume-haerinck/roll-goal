@@ -1,9 +1,9 @@
-#include "level-state.h"
+#include "title-screen-state.h"
 
-LevelState::LevelState() {
+TitleScreenState::TitleScreenState() {
 }
 
-LevelState::~LevelState() {
+TitleScreenState::~TitleScreenState() {
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -11,16 +11,16 @@ LevelState::~LevelState() {
 /////////////////////////////////////////////////////////////////////////////
 
 
-void LevelState::onEnter() {
+void TitleScreenState::onEnter() {
 	m_lifeCycle = LifeCycle::HAS_ENTERED;
 }
 
-void LevelState::update() {
+void TitleScreenState::update() {
 	if (m_lifeCycle == LifeCycle::HAS_ENTERED)
 		m_lifeCycle = LifeCycle::HAS_UPDATED;
 }
 
-void LevelState::onExit() {
+void TitleScreenState::onExit() {
 	m_lifeCycle = LifeCycle::HAS_EXITED;
 }
 
@@ -30,6 +30,6 @@ void LevelState::onExit() {
 /////////////////////////////////////////////////////////////////////////////
 
 
-GameState LevelState::getName() const {
-    return GameState::LEVEL;
+GameState TitleScreenState::getName() const {
+	return GameState::TITLE_SCREEN;
 }

@@ -18,6 +18,8 @@ Game::Game() : m_running(true)
 
 	initSDL();
     initImgui();
+
+	m_states.push(GameState::TITLE_SCREEN);
 }
 
 Game::~Game() {
@@ -34,7 +36,7 @@ Game::~Game() {
 
 
 void Game::update() {
-	
+	m_states.update();
 }
 
 /////////////////////////////////////////////////////////////////////////////

@@ -1,9 +1,9 @@
-#include "level-state.h"
+#include "game-over-state.h"
 
-LevelState::LevelState() {
+GameOverState::GameOverState() {
 }
 
-LevelState::~LevelState() {
+GameOverState::~GameOverState() {
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -11,16 +11,16 @@ LevelState::~LevelState() {
 /////////////////////////////////////////////////////////////////////////////
 
 
-void LevelState::onEnter() {
+void GameOverState::onEnter() {
 	m_lifeCycle = LifeCycle::HAS_ENTERED;
 }
 
-void LevelState::update() {
+void GameOverState::update() {
 	if (m_lifeCycle == LifeCycle::HAS_ENTERED)
 		m_lifeCycle = LifeCycle::HAS_UPDATED;
 }
 
-void LevelState::onExit() {
+void GameOverState::onExit() {
 	m_lifeCycle = LifeCycle::HAS_EXITED;
 }
 
@@ -30,6 +30,6 @@ void LevelState::onExit() {
 /////////////////////////////////////////////////////////////////////////////
 
 
-GameState LevelState::getName() const {
-    return GameState::LEVEL;
+GameState GameOverState::getName() const {
+	return GameState::GAME_OVER;
 }
