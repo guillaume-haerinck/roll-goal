@@ -26,6 +26,11 @@ public:
      */
     void update();
 
+    /**
+     * @brief Delete all systems
+     */
+    void clear();
+
 public:
     std::vector<System> getInitSystemNames() const;
     std::vector<System> getAvailableSystemNames() const;

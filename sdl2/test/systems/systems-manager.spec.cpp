@@ -5,14 +5,14 @@
 #include "systems/systems-manager.h"
 #include "systems/i-system.h"
 
-class FSystemsManager : public testing::Test {
+class SystemsManagerSpec : public testing::Test {
 	public:
 		entt::registry registry;
 		SystemsManager* systemsManager = new SystemsManager(registry);
 };
 
 
-TEST_F(FSystemsManager, InitSystems_ShouldInitInTheSameOrder) {
+TEST_F(SystemsManagerSpec, InitSystems_ShouldInitInTheSameOrder) {
 	std::vector<System> systemsToInit {
 		System::RENDER,
 		System::PHYSIC
@@ -24,7 +24,7 @@ TEST_F(FSystemsManager, InitSystems_ShouldInitInTheSameOrder) {
 	EXPECT_EQ(systemsToInit, initSystemNames);
 }
 
-TEST_F(FSystemsManager, InitSystems_ShouldEmptyOldStack) {
+TEST_F(SystemsManagerSpec, InitSystems_ShouldEmptyOldStack) {
 	std::vector<System> oldSystems {
 		System::RENDER
 	};
@@ -37,4 +37,17 @@ TEST_F(FSystemsManager, InitSystems_ShouldEmptyOldStack) {
 
 	auto initSystemNames = systemsManager->getInitSystemNames();
 	EXPECT_EQ(newSystems, initSystemNames);
+}
+
+TEST_F(SystemsManagerSpec, Clear_ShouldEmptyAll) {
+	std::vector<System> systems {
+		System::RENDER,
+		System::PHYSIC
+	};
+	systemsManager->initSystems(systems);
+
+	systemsManager->clear();
+	auto initSystems = systemsManager->getInitSystemNames();
+
+	EXPECT_EQ(initSystems.size(), 0);
 }

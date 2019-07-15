@@ -3,18 +3,18 @@
 #include "states/states-manager.h"
 #include "states/i-state.h"
 
-class FStatesManager : public testing::Test {
+class StatesManagerSpec : public testing::Test {
 	public:
 		StatesManager statesManager;
 };
 
-TEST_F(FStatesManager, IsEmpty) {
+TEST_F(StatesManagerSpec, IsEmpty) {
 	EXPECT_EQ(statesManager.isEmpty(), true);
 	statesManager.push(GameState::LEVEL);
 	EXPECT_EQ(statesManager.isEmpty(), false);
 }
 
-TEST_F(FStatesManager, Push_LastPushShouldBeActiveState) {
+TEST_F(StatesManagerSpec, Push_LastPushShouldBeActiveState) {
 	statesManager.push(GameState::LEVEL);
 	auto oldState = statesManager.getActiveState();
 	ASSERT_FALSE(oldState == nullptr);
@@ -26,7 +26,7 @@ TEST_F(FStatesManager, Push_LastPushShouldBeActiveState) {
 	EXPECT_EQ(newState->getName(), GameState::TITLE_SCREEN);
 }
 
-TEST_F(FStatesManager, Push_ShouldTriggerOnExitOnEnter) {
+TEST_F(StatesManagerSpec, Push_ShouldTriggerOnExitOnEnter) {
 	statesManager.push(GameState::TITLE_SCREEN);
 	auto oldState = statesManager.getActiveState();
 	EXPECT_EQ(oldState->getLifeCycle(), LifeCycle::HAS_ENTERED);
@@ -38,7 +38,7 @@ TEST_F(FStatesManager, Push_ShouldTriggerOnExitOnEnter) {
 	EXPECT_EQ(newState->getLifeCycle(), LifeCycle::HAS_ENTERED);
 }
 
-TEST_F(FStatesManager, Pop_ShouldTriggerOnExitOnEnter) {
+TEST_F(StatesManagerSpec, Pop_ShouldTriggerOnExitOnEnter) {
 	statesManager.push(GameState::TITLE_SCREEN);
 	auto oldState = statesManager.getActiveState();
 	statesManager.push(GameState::LEVEL);
@@ -50,7 +50,7 @@ TEST_F(FStatesManager, Pop_ShouldTriggerOnExitOnEnter) {
 	EXPECT_EQ(newState->getLifeCycle(), LifeCycle::HAS_EXITED);
 }
 
-TEST_F(FStatesManager, Pop_ShouldNotPopIfOnlyOneState) {
+TEST_F(StatesManagerSpec, Pop_ShouldNotPopIfOnlyOneState) {
 	statesManager.push(GameState::LEVEL);
 	statesManager.pop();
 	EXPECT_EQ(statesManager.isEmpty(), false);
