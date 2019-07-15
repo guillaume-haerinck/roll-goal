@@ -4,7 +4,7 @@
 
 class LevelState : public IState {
 public:
-    LevelState(entt::registry& registry);
+    LevelState(Context context);
     virtual ~LevelState();
 
     void onEnter();

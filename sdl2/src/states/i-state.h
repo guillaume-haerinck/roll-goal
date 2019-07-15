@@ -2,6 +2,8 @@
 
 #include <entt/entt.hpp>
 
+class StatesManager; // Forward declaration
+
 /**
  * @brief The states that the game can be in
  * @detail Used as index of an array so must be continuous
@@ -22,11 +24,19 @@ enum class LifeCycle {
 };
 
 /**
+ * @brief Holds common objects used across game states
+ */
+struct Context {
+    StatesManager* statesManager = nullptr;
+    entt::registry* registry = nullptr;
+};
+
+/**
  * @brief Common interface for every state of the game
  */
 class IState {
 public:
-    IState(GameState name, entt::registry& registry) : m_name(name), m_registry(registry) {}
+    IState(GameState name, Context context) : m_name(name), m_context(context) {}
     virtual void onEnter() = 0;
     virtual void update() = 0;
     virtual void onExit() = 0;
@@ -38,5 +48,5 @@ public:
 protected:
 	LifeCycle m_lifeCycle;
     GameState m_name;
-    entt::registry& m_registry;
+    Context m_context;
 };

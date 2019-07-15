@@ -4,7 +4,7 @@
 
 class TitleScreenState : public IState {
 public:
-	TitleScreenState(entt::registry& registry);
+	TitleScreenState(Context context);
 	virtual ~TitleScreenState();
 
 	void onEnter();

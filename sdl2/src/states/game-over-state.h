@@ -4,7 +4,7 @@
 
 class GameOverState : public IState {
 public:
-	GameOverState(entt::registry& registry);
+	GameOverState(Context context);
 	virtual ~GameOverState();
 
 	void onEnter();

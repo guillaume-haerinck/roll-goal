@@ -1,6 +1,6 @@
 #include "title-screen-state.h"
 
-TitleScreenState::TitleScreenState(entt::registry& registry) : IState(GameState::TITLE_SCREEN, registry) {
+TitleScreenState::TitleScreenState(Context context) : IState(GameState::TITLE_SCREEN, context) {
 }
 
 TitleScreenState::~TitleScreenState() {

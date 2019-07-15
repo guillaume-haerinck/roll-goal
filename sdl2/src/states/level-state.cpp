@@ -1,6 +1,6 @@
 #include "level-state.h"
 
-LevelState::LevelState(entt::registry& registry) : IState(GameState::LEVEL, registry)
+LevelState::LevelState(Context context) : IState(GameState::LEVEL, context)
 {
 }
 

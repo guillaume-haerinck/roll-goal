@@ -25,7 +25,7 @@ void SystemsManager::initSystems(std::vector<System> systems) {
             break;
 
         case System::RENDER:
-             m_systems.at(i) = std::make_unique<RenderSystem>(m_registry);
+            m_systems.at(i) = std::make_unique<RenderSystem>(m_registry);
             break;
         
         default:
