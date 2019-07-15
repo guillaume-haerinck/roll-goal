@@ -41,9 +41,8 @@ void SystemsManager::update() {
 std::vector<System> SystemsManager::getInitSystemNames() const {
     std::vector<System> initSystemNames;
 
-/* 
-    for (auto system : m_systems) {
-        switch (system->getName()) {
+    for (int i = 0; i < m_systems.size(); i++) {
+        switch (m_systems.at(i)->getName()) {
         case System::PHYSIC:
             initSystemNames.push_back(System::PHYSIC);
             break;
@@ -56,11 +55,13 @@ std::vector<System> SystemsManager::getInitSystemNames() const {
             break;
         }
     }
-*/
 
     return initSystemNames;
 }
 
 std::vector<System> SystemsManager::getAvailableSystemNames() const {
-
+    return std::vector<System> {
+        System::RENDER,
+        System::PHYSIC
+    };
 }
