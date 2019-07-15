@@ -8,7 +8,6 @@
 
 /**
  * @brief Handles systems creation and updates
- * @detail The systems are always continuous in memory
  */
 class SystemsManager {
 public:
@@ -18,7 +17,10 @@ public:
     /**
      * @brief Create said systems on the stack
      */
-    void initSystems(std::vector<System> systems);
+    template<class System>
+    void push() {
+        m_systems.push_back(std::make_unique<System>(m_registry));
+    }
 
     /**
      * @brief Update each initiated systems

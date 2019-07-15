@@ -14,26 +14,6 @@ SystemsManager::~SystemsManager() {
 ////////////////////////////// PUBLIC METHODS ///////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
 
-void SystemsManager::initSystems(std::vector<System> systems) {
-    m_systems.clear();
-    m_systems.resize(systems.size());
-
-    for (int i = 0; i < systems.size(); i++) {
-        switch (systems[i]) {
-        case System::PHYSIC:
-            m_systems.at(i) = std::make_unique<PhysicSystem>(m_registry);
-            break;
-
-        case System::RENDER:
-            m_systems.at(i) = std::make_unique<RenderSystem>(m_registry);
-            break;
-        
-        default:
-            break;
-        }
-    }
-}
-
 void SystemsManager::update() {
 
 }
@@ -48,22 +28,9 @@ void SystemsManager::clear() {
 
 std::vector<System> SystemsManager::getInitSystemNames() const {
     std::vector<System> initSystemNames;
-
     for (int i = 0; i < m_systems.size(); i++) {
-        switch (m_systems.at(i)->getName()) {
-        case System::PHYSIC:
-            initSystemNames.push_back(System::PHYSIC);
-            break;
-
-        case System::RENDER:
-            initSystemNames.push_back(System::RENDER);
-            break;
-        
-        default:
-            break;
-        }
+        initSystemNames.push_back(m_systems.at(i)->getName());
     }
-
     return initSystemNames;
 }
 

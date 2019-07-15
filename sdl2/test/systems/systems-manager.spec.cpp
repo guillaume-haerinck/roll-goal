@@ -3,6 +3,8 @@
 #include <entt/entt.hpp>
 
 #include "systems/systems-manager.h"
+#include "systems/render-system.h"
+#include "systems/physic-system.h"
 #include "systems/i-system.h"
 
 class SystemsManagerSpec : public testing::Test {
@@ -11,43 +13,15 @@ class SystemsManagerSpec : public testing::Test {
 		SystemsManager* systemsManager = new SystemsManager(registry);
 };
 
-
 TEST_F(SystemsManagerSpec, InitSystems_ShouldInitInTheSameOrder) {
 	std::vector<System> systemsToInit {
 		System::RENDER,
 		System::PHYSIC
 	};
 
-	systemsManager->initSystems(systemsToInit);
+	systemsManager->push<RenderSystem>();
+	systemsManager->push<PhysicSystem>();
 	auto initSystemNames = systemsManager->getInitSystemNames();
 
 	EXPECT_EQ(systemsToInit, initSystemNames);
-}
-
-TEST_F(SystemsManagerSpec, InitSystems_ShouldEmptyOldStack) {
-	std::vector<System> oldSystems {
-		System::RENDER
-	};
-	systemsManager->initSystems(oldSystems);
-
-	std::vector<System> newSystems {
-		System::PHYSIC
-	};
-	systemsManager->initSystems(newSystems);
-
-	auto initSystemNames = systemsManager->getInitSystemNames();
-	EXPECT_EQ(newSystems, initSystemNames);
-}
-
-TEST_F(SystemsManagerSpec, Clear_ShouldEmptyAll) {
-	std::vector<System> systems {
-		System::RENDER,
-		System::PHYSIC
-	};
-	systemsManager->initSystems(systems);
-
-	systemsManager->clear();
-	auto initSystems = systemsManager->getInitSystemNames();
-
-	EXPECT_EQ(initSystems.size(), 0);
 }
