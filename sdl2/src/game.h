@@ -2,6 +2,7 @@
 
 #include <SDL2/SDL.h>
 #include "states/states-manager.h"
+#include "graphics/renderer.h"
 
 /**
  * @brief Base root of the app
@@ -22,6 +23,7 @@ public:
 private:
     void initSDL();
     void initImgui() const;
+    void handleSdlEvents();
 
 private:
     SDL_Window* m_window;
@@ -30,4 +32,5 @@ private:
     bool m_running;
 
     StatesManager m_states;
+    Renderer m_renderer;
 };

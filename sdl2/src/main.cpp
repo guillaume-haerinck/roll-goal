@@ -41,37 +41,6 @@ void gameLoop(void* data) {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	game->update();
-
-	{
-		ImGui_ImplOpenGL3_NewFrame();
-		ImGui_ImplSDL2_NewFrame(game->getWindow());
-		ImGui::NewFrame();
-		ImGui::Begin("Main debug window");
-		ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
-		ImGui::End();
-	}
 	
-	{
-		ImGui::Render();
-		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-	}
-
-	SDL_Event e;
-	while (SDL_PollEvent(&e)) {
-		switch (e.type) {
-		case SDL_QUIT:
-			game->exit();
-			break;
-
-		case SDL_KEYDOWN:
-			spdlog::info("Key down");
-			break;
-
-		case SDL_MOUSEBUTTONDOWN:
-			spdlog::info("Button down");
-			break;
-		}
-	}
-
 	SDL_GL_SwapWindow(game->getWindow());
 }

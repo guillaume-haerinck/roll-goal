@@ -24,7 +24,7 @@ enum class LifeCycle {
 };
 
 /**
- * @brief Holds common objects used across game states
+ * @brief Holds references to common objects used across game states
  */
 struct Context {
     StatesManager* statesManager = nullptr;
