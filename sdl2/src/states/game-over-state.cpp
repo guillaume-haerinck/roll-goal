@@ -1,6 +1,7 @@
 #include "game-over-state.h"
 
-GameOverState::GameOverState() {
+GameOverState::GameOverState() : IState(GameState::GAME_OVER)
+{
 }
 
 GameOverState::~GameOverState() {
@@ -30,6 +31,3 @@ void GameOverState::onExit() {
 /////////////////////////////////////////////////////////////////////////////
 
 
-GameState GameOverState::getName() const {
-	return GameState::GAME_OVER;
-}

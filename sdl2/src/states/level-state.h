@@ -10,7 +10,4 @@ public:
     void onEnter();
     void update();
     void onExit();
-
-public:
-    GameState getName() const;
 };

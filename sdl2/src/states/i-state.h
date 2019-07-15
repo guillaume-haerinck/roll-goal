@@ -24,14 +24,16 @@ enum class LifeCycle {
  */
 class IState {
 public:
+    IState(GameState name) : m_name(name) {}
     virtual void onEnter() = 0;
     virtual void update() = 0;
     virtual void onExit() = 0;
 
 public:
-    virtual GameState getName() const = 0;
-	LifeCycle getLifeCycle() { return m_lifeCycle; };
+    GameState getName() const { return m_name; };
+	LifeCycle getLifeCycle() const { return m_lifeCycle; };
 
 protected:
 	LifeCycle m_lifeCycle;
+    GameState m_name;
 };

@@ -1,6 +1,7 @@
 #include "level-state.h"
 
-LevelState::LevelState() {
+LevelState::LevelState() : IState(GameState::LEVEL)
+{
 }
 
 LevelState::~LevelState() {
@@ -30,6 +31,3 @@ void LevelState::onExit() {
 /////////////////////////////////////////////////////////////////////////////
 
 
-GameState LevelState::getName() const {
-    return GameState::LEVEL;
-}

@@ -1,6 +1,6 @@
 #include "title-screen-state.h"
 
-TitleScreenState::TitleScreenState() {
+TitleScreenState::TitleScreenState() : IState(GameState::TITLE_SCREEN) {
 }
 
 TitleScreenState::~TitleScreenState() {
@@ -28,8 +28,3 @@ void TitleScreenState::onExit() {
 /////////////////////////////////////////////////////////////////////////////
 //////////////////////////// GETTERS & SETTERS //////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
-
-
-GameState TitleScreenState::getName() const {
-	return GameState::TITLE_SCREEN;
-}
