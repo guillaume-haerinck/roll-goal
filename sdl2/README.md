@@ -59,3 +59,11 @@ Then open [your local server](http://127.0.0.1:8000/) to see the project.
 ## Running test
 
 The test target is build by default. To run it, you can launch the `TEST_ROLL_GOAL` executable next to the project, or you can go to the build folder, and run the CMake test utility with `ctest .`
+
+## Dependencies
+
+- [ENTT](https://github.com/skypjack/entt) - An ECS library
+
+## Inspired by
+
+- [WacMan](https://github.com/carlfindahl/wacman) - A pacman clone made with ENTT
