@@ -1,38 +1,40 @@
 #include <gtest/gtest.h>
 #include <vector>
+#include <entt/entt.hpp>
 
 #include "systems/systems-manager.h"
 #include "systems/i-system.h"
 
 class FSystemsManager : public testing::Test {
 	public:
-		SystemsManager systemsManager;
+		entt::registry registry;
+		SystemsManager* systemsManager = new SystemsManager(registry);
 };
 
 
-TEST_F(FSystemsManager, InitStates_ShouldInitInTheSameOrder) {
+TEST_F(FSystemsManager, InitSystems_ShouldInitInTheSameOrder) {
 	std::vector<System> systemsToInit {
 		System::RENDER,
 		System::PHYSIC
 	};
 
-	systemsManager.initSystems(systemsToInit);
-	auto initSystemNames = systemsManager.getInitSystemNames();
+	systemsManager->initSystems(systemsToInit);
+	auto initSystemNames = systemsManager->getInitSystemNames();
 
 	EXPECT_EQ(systemsToInit, initSystemNames);
 }
 
-TEST_F(FSystemsManager, InitStates_ShouldEmptyOldStack) {
+TEST_F(FSystemsManager, InitSystems_ShouldEmptyOldStack) {
 	std::vector<System> oldSystems {
 		System::RENDER
 	};
-	systemsManager.initSystems(oldSystems);
+	systemsManager->initSystems(oldSystems);
 
 	std::vector<System> newSystems {
 		System::PHYSIC
 	};
-	systemsManager.initSystems(newSystems);
+	systemsManager->initSystems(newSystems);
 
-	auto initSystemNames = systemsManager.getInitSystemNames();
+	auto initSystemNames = systemsManager->getInitSystemNames();
 	EXPECT_EQ(newSystems, initSystemNames);
 }

@@ -3,7 +3,8 @@
 #include "physic-system.h"
 #include "render-system.h"
 
-SystemsManager::SystemsManager() {
+SystemsManager::SystemsManager(entt::registry& registry) : m_registry(registry)
+{
 }
 
 SystemsManager::~SystemsManager() {
@@ -20,11 +21,11 @@ void SystemsManager::initSystems(std::vector<System> systems) {
     for (int i = 0; i < systems.size(); i++) {
         switch (systems[i]) {
         case System::PHYSIC:
-            m_systems.at(i) = std::make_unique<PhysicSystem>();
+            m_systems.at(i) = std::make_unique<PhysicSystem>(m_registry);
             break;
 
         case System::RENDER:
-             m_systems.at(i) = std::make_unique<RenderSystem>();
+             m_systems.at(i) = std::make_unique<RenderSystem>(m_registry);
             break;
         
         default:

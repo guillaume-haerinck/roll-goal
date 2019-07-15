@@ -7,7 +7,7 @@
  */
 class RenderSystem : public ISystem {
 public:
-    RenderSystem();
+    RenderSystem(entt::registry& registry);
     ~RenderSystem();
 
     void update();

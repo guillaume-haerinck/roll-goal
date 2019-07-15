@@ -1,6 +1,6 @@
 #include "game-over-state.h"
 
-GameOverState::GameOverState() : IState(GameState::GAME_OVER)
+GameOverState::GameOverState(entt::registry& registry) : IState(GameState::GAME_OVER, registry)
 {
 }
 

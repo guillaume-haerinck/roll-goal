@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <memory>
+#include <entt/entt.hpp>
 
 #include "i-system.h"
 
@@ -11,7 +12,7 @@
  */
 class SystemsManager {
 public:
-    SystemsManager();
+    SystemsManager(entt::registry& registry);
     ~SystemsManager();
 
     /**
@@ -31,4 +32,5 @@ public:
 
 private:
     std::vector<std::unique_ptr<ISystem>> m_systems;
+    entt::registry& m_registry;
 };

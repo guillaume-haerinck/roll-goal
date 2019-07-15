@@ -6,9 +6,9 @@
 
 StatesManager::StatesManager() {
     m_states.fill(nullptr);
-	m_states.at(GameState::TITLE_SCREEN) = std::make_shared<TitleScreenState>();
-    m_states.at(GameState::LEVEL) = std::make_shared<LevelState>();
-	m_states.at(GameState::GAME_OVER) = std::make_shared<GameOverState>();
+	m_states.at(GameState::TITLE_SCREEN) = std::make_shared<TitleScreenState>(m_registry);
+    m_states.at(GameState::LEVEL) = std::make_shared<LevelState>(m_registry);
+	m_states.at(GameState::GAME_OVER) = std::make_shared<GameOverState>(m_registry);
 }
 
 /////////////////////////////////////////////////////////////////////////////

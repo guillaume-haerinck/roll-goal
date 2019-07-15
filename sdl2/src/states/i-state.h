@@ -1,5 +1,7 @@
 #pragma once
 
+#include <entt/entt.hpp>
+
 /**
  * @brief The states that the game can be in
  * @detail Used as index of an array so must be continuous
@@ -24,7 +26,7 @@ enum class LifeCycle {
  */
 class IState {
 public:
-    IState(GameState name) : m_name(name) {}
+    IState(GameState name, entt::registry& registry) : m_name(name), m_registry(registry) {}
     virtual void onEnter() = 0;
     virtual void update() = 0;
     virtual void onExit() = 0;
@@ -36,4 +38,5 @@ public:
 protected:
 	LifeCycle m_lifeCycle;
     GameState m_name;
+    entt::registry& m_registry;
 };

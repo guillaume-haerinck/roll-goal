@@ -1,6 +1,6 @@
 #include "physic-system.h"
 
-PhysicSystem::PhysicSystem() : ISystem(System::PHYSIC)
+PhysicSystem::PhysicSystem(entt::registry& registry) : ISystem(System::PHYSIC, registry)
 {
 }
 

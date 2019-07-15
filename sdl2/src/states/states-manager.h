@@ -10,6 +10,7 @@
 /**
  * @brief Pushdown Automaton to handle game states
  * @description Only one state can be active at a time
+ * @detail The registry is created here
  * 
  * @link http://gameprogrammingpatterns.com/state.html
  */

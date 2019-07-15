@@ -4,7 +4,7 @@
 
 class PhysicSystem : public ISystem {
 public:
-    PhysicSystem();
+    PhysicSystem(entt::registry& registry);
     ~PhysicSystem();
 
     void update();
