@@ -14,14 +14,17 @@ SystemsManager::~SystemsManager() {
 /////////////////////////////////////////////////////////////////////////////
 
 void SystemsManager::initSystems(std::vector<System> systems) {
-    for (System systemName : systems) {
-        switch (systemName) {
+    m_systems.clear();
+    m_systems.resize(systems.size());
+
+    for (int i = 0; i < systems.size(); i++) {
+        switch (systems[i]) {
         case System::PHYSIC:
-            m_systems.push_back(std::make_unique<PhysicSystem>());
+            m_systems.at(i) = std::make_unique<PhysicSystem>();
             break;
 
         case System::RENDER:
-            m_systems.push_back(std::make_unique<RenderSystem>());
+             m_systems.at(i) = std::make_unique<RenderSystem>();
             break;
         
         default:
