@@ -1,10 +1,10 @@
-#include "physic-system.h"
+#include "render-system.h"
 
-PhysicSystem::PhysicSystem() : ISystem(System::PHYSIC)
+RenderSystem::RenderSystem() : ISystem(System::RENDER)
 {
 }
 
-PhysicSystem::~PhysicSystem()
+RenderSystem::~RenderSystem()
 {
 }
 
@@ -13,6 +13,6 @@ PhysicSystem::~PhysicSystem()
 /////////////////////////////////////////////////////////////////////////////
 
 
-void PhysicSystem::update() {
+void RenderSystem::update() {
 
 }
