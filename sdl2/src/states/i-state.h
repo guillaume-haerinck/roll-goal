@@ -1,6 +1,9 @@
 #pragma once
 
+#include <vector>
 #include <entt/entt.hpp>
+
+#include "systems/i-system.h"
 
 class StatesManager; // Forward declaration
 
@@ -49,4 +52,5 @@ protected:
 	LifeCycle m_lifeCycle;
     GameState m_name;
     Context m_context;
+    std::vector<ISystem*> m_systems;
 };
