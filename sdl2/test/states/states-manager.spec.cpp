@@ -1,57 +1,69 @@
-#include <gtest/gtest.h>
+#include "catch2/catch.hpp"
 
 #include "states/states-manager.h"
 #include "states/i-state.h"
 
-class StatesManagerSpec : public testing::Test {
-	public:
+SCENARIO("StateManager can push, pop and handle transition of Game states") {
+	GIVEN("An empty StateManager") {
 		StatesManager statesManager;
-};
+		REQUIRE(statesManager.isEmpty() == true);
 
-TEST_F(StatesManagerSpec, IsEmpty) {
-	EXPECT_EQ(statesManager.isEmpty(), true);
-	statesManager.push(GameState::LEVEL);
-	EXPECT_EQ(statesManager.isEmpty(), false);
-}
+		WHEN("we push one state") {
+			statesManager.push(GameState::TITLE_SCREEN);
 
-TEST_F(StatesManagerSpec, Push_LastPushShouldBeActiveState) {
-	statesManager.push(GameState::LEVEL);
-	auto oldState = statesManager.getActiveState();
-	ASSERT_FALSE(oldState == nullptr);
-	EXPECT_EQ(oldState->getName(), GameState::LEVEL);
+			THEN("the manager should not be empty anymore") {
+				REQUIRE(statesManager.isEmpty() == false);
+			}
+			THEN("the state pushed should be active") {
+				auto state = statesManager.getActiveState();
+				REQUIRE(state->getName() == GameState::TITLE_SCREEN);
+			}
+		}
 
-	statesManager.push(GameState::TITLE_SCREEN);
-	auto newState = statesManager.getActiveState();
-	ASSERT_FALSE(newState == nullptr);
-	EXPECT_EQ(newState->getName(), GameState::TITLE_SCREEN);
-}
+		WHEN("we push multiple states") {
+			statesManager.push(GameState::TITLE_SCREEN);
+			auto state1 = statesManager.getActiveState();
+			statesManager.push(GameState::LEVEL);
+			auto state2 = statesManager.getActiveState();
+		
+			THEN("it should have exited the first state") {
+				REQUIRE(state1->getLifeCycle() == LifeCycle::HAS_EXITED);
+			}
+			THEN("it should have entered the second state") {
+				REQUIRE(state2->getLifeCycle() == LifeCycle::HAS_ENTERED);
+			}
+		}
+	}
 
-TEST_F(StatesManagerSpec, Push_ShouldTriggerOnExitOnEnter) {
-	statesManager.push(GameState::TITLE_SCREEN);
-	auto oldState = statesManager.getActiveState();
-	EXPECT_EQ(oldState->getLifeCycle(), LifeCycle::HAS_ENTERED);
+	GIVEN("A StateManager with only one state") {
+		StatesManager statesManager;
+		statesManager.push(GameState::LEVEL);
 
-	statesManager.push(GameState::LEVEL);
+		WHEN("we pop") {
+			statesManager.pop();
 
-	auto newState = statesManager.getActiveState();
-	EXPECT_EQ(oldState->getLifeCycle(), LifeCycle::HAS_EXITED);
-	EXPECT_EQ(newState->getLifeCycle(), LifeCycle::HAS_ENTERED);
-}
+			THEN("it should not pop") {
+				REQUIRE(statesManager.isEmpty() == false);
+			}
+		}
+	}
 
-TEST_F(StatesManagerSpec, Pop_ShouldTriggerOnExitOnEnter) {
-	statesManager.push(GameState::TITLE_SCREEN);
-	auto oldState = statesManager.getActiveState();
-	statesManager.push(GameState::LEVEL);
-	auto newState = statesManager.getActiveState();
+	GIVEN("A StateManager with multiple states") {
+		StatesManager statesManager;
+		statesManager.push(GameState::TITLE_SCREEN);
+		auto state1 = statesManager.getActiveState();
+		statesManager.push(GameState::LEVEL);
+		auto state2 = statesManager.getActiveState();
 
-	statesManager.pop();
-
-	EXPECT_EQ(oldState->getLifeCycle(), LifeCycle::HAS_ENTERED);
-	EXPECT_EQ(newState->getLifeCycle(), LifeCycle::HAS_EXITED);
-}
-
-TEST_F(StatesManagerSpec, Pop_ShouldNotPopIfOnlyOneState) {
-	statesManager.push(GameState::LEVEL);
-	statesManager.pop();
-	EXPECT_EQ(statesManager.isEmpty(), false);
+		WHEN("we pop") {
+			statesManager.pop();
+			
+			THEN("it should have entered the first state") {
+				REQUIRE(state1->getLifeCycle() == LifeCycle::HAS_ENTERED);
+			}
+			THEN("it should have exited the second state") {
+				REQUIRE(state2->getLifeCycle() == LifeCycle::HAS_EXITED);
+			}
+		}
+	}
 }

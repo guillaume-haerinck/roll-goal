@@ -88,9 +88,16 @@ if (NOT EMSCRIPTEN)
         STB_IMAGE
         IMGUI
     )
+    if (UNIX) # Use dynamic linking library
+        target_link_libraries(${PROJECT_NAME} -ldl)
+    endif()
 
     # Make the test discoverable by CTest
-    enable_testing()
-    include(GoogleTest)
-    gtest_discover_tests(TEST_ROLL_GOAL ${MY_TESTS})
+    find_package(Catch2)
+    if (Catch2)
+        enable_testing()
+        include(CTest)
+        include(Catch)
+        catch_discover_tests(TEST_ROLL_GOAL)
+    endif()
 endif()
