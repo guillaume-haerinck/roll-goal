@@ -29,6 +29,8 @@ enum class LifeCycle {
 /**
  * @brief Holds references to common objects used across game states
  */
+// TODO add a class that can handle multiple queue for renderrequest/command(for inputs)/audio. It is unquued at the end of frame by each specific system
+// TODO add an event emitter
 struct Context {
     StatesManager* statesManager = nullptr;
     entt::registry* registry = nullptr;
