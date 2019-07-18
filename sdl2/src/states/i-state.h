@@ -12,15 +12,16 @@ class StatesManager; // Forward declaration
  * @detail Used as index of an array so must be continuous
  */
 enum GameState {
-    LEVEL = 0,
-    TITLE_SCREEN,
-    GAME_OVER
+    STATE_LEVEL = 0,
+    STATE_TITLE_SCREEN,
+    STATE_GAME_OVER,
+    _STATE_MAX_NUMBER
 };
 
 /**
  * @brief Describe the step the state is currently in
  */
-enum class LifeCycle {
+enum class StateLifeCycle {
 	HAS_ENTERED,
 	HAS_UPDATED,
 	HAS_EXITED
@@ -29,7 +30,8 @@ enum class LifeCycle {
 /**
  * @brief Holds references to common objects used across game states
  */
-// TODO add a class that can handle multiple queue for renderrequest/command(for inputs)/audio. It is unquued at the end of frame by each specific system
+// TODO add the renderer
+// TODO add an audio player
 // TODO add an event emitter
 struct Context {
     StatesManager* statesManager = nullptr;
@@ -42,16 +44,17 @@ struct Context {
 class IState {
 public:
     IState(GameState name, Context context) : m_name(name), m_context(context) {}
+    virtual ~IState() = default;
     virtual void onEnter() = 0;
     virtual void update() = 0;
     virtual void onExit() = 0;
 
 public:
     GameState getName() const { return m_name; };
-	LifeCycle getLifeCycle() const { return m_lifeCycle; };
+	StateLifeCycle getLifeCycle() const { return m_lifeCycle; };
 
 protected:
-	LifeCycle m_lifeCycle;
+	StateLifeCycle m_lifeCycle;
     GameState m_name;
     Context m_context;
     std::vector<ISystem*> m_systems;

@@ -1,6 +1,6 @@
 #include "game-over-state.h"
 
-GameOverState::GameOverState(Context context) : IState(GameState::GAME_OVER, context)
+GameOverState::GameOverState(Context context) : IState(STATE_GAME_OVER, context)
 {
 }
 
@@ -13,16 +13,16 @@ GameOverState::~GameOverState() {
 
 
 void GameOverState::onEnter() {
-	m_lifeCycle = LifeCycle::HAS_ENTERED;
+	m_lifeCycle = StateLifeCycle::HAS_ENTERED;
 }
 
 void GameOverState::update() {
-	if (m_lifeCycle == LifeCycle::HAS_ENTERED)
-		m_lifeCycle = LifeCycle::HAS_UPDATED;
+	if (m_lifeCycle == StateLifeCycle::HAS_ENTERED)
+		m_lifeCycle = StateLifeCycle::HAS_UPDATED;
 }
 
 void GameOverState::onExit() {
-	m_lifeCycle = LifeCycle::HAS_EXITED;
+	m_lifeCycle = StateLifeCycle::HAS_EXITED;
 }
 
 

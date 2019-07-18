@@ -10,13 +10,12 @@
 /**
  * @brief Pushdown Automaton to handle game states
  * @description Only one state can be active at a time
- * @detail The registry is created here
  * 
  * @link http://gameprogrammingpatterns.com/state.html
  */
 class StatesManager {
 public:
-    StatesManager();
+    StatesManager(entt::registry& registry);
 
     /**
      * @brief Add a state on top of the stack
@@ -40,7 +39,7 @@ public:
     bool isEmpty() const;
 
 private:
-    entt::registry m_registry;
-    std::array<std::shared_ptr<IState>, 3> m_states;
+    entt::registry& m_registry;
+    std::array<std::shared_ptr<IState>, _STATE_MAX_NUMBER> m_states;
     std::stack<std::shared_ptr<IState>> m_stateStack;
 };

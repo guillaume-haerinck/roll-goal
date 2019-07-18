@@ -1,7 +1,7 @@
 #pragma once
 
 namespace comp {
-    struct RigidBody {
+    struct Mesh {
 
     };
 };

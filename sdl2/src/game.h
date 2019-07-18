@@ -31,6 +31,7 @@ private:
     static bool m_instanciated;
     bool m_running;
 
+    entt::registry m_registry;
     StatesManager m_states;
     Renderer m_renderer;
 };

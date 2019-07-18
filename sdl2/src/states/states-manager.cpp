@@ -4,16 +4,17 @@
 #include "title-screen-state.h"
 #include "game-over-state.h"
 
-StatesManager::StatesManager() {
+StatesManager::StatesManager(entt::registry& registry) : m_registry(registry) 
+{
 	Context context = {
 		this,
 		&m_registry
 	};
 
     m_states.fill(nullptr);
-	m_states.at(GameState::TITLE_SCREEN) = std::make_shared<TitleScreenState>(context);
-    m_states.at(GameState::LEVEL) = std::make_shared<LevelState>(context);
-	m_states.at(GameState::GAME_OVER) = std::make_shared<GameOverState>(context);
+	m_states.at(STATE_TITLE_SCREEN) = std::make_shared<TitleScreenState>(context);
+    m_states.at(STATE_LEVEL) = std::make_shared<LevelState>(context);
+	m_states.at(STATE_GAME_OVER) = std::make_shared<GameOverState>(context);
 }
 
 /////////////////////////////////////////////////////////////////////////////

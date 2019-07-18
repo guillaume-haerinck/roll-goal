@@ -1,6 +1,6 @@
 #include "title-screen-state.h"
 
-TitleScreenState::TitleScreenState(Context context) : IState(GameState::TITLE_SCREEN, context) {
+TitleScreenState::TitleScreenState(Context context) : IState(STATE_TITLE_SCREEN, context) {
 }
 
 TitleScreenState::~TitleScreenState() {
@@ -12,16 +12,16 @@ TitleScreenState::~TitleScreenState() {
 
 
 void TitleScreenState::onEnter() {
-	m_lifeCycle = LifeCycle::HAS_ENTERED;
+	m_lifeCycle = StateLifeCycle::HAS_ENTERED;
 }
 
 void TitleScreenState::update() {
-	if (m_lifeCycle == LifeCycle::HAS_ENTERED)
-		m_lifeCycle = LifeCycle::HAS_UPDATED;
+	if (m_lifeCycle == StateLifeCycle::HAS_ENTERED)
+		m_lifeCycle = StateLifeCycle::HAS_UPDATED;
 }
 
 void TitleScreenState::onExit() {
-	m_lifeCycle = LifeCycle::HAS_EXITED;
+	m_lifeCycle = StateLifeCycle::HAS_EXITED;
 }
 
 

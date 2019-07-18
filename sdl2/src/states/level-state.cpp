@@ -3,7 +3,7 @@
 #include "systems/physic-system.h"
 #include "systems/render-system.h"
 
-LevelState::LevelState(Context context) : IState(GameState::LEVEL, context)
+LevelState::LevelState(Context context) : IState(STATE_LEVEL, context)
 {
 	m_systems.resize(2);
 	m_systems.at(0) = new PhysicSystem(*context.registry);
@@ -22,7 +22,7 @@ LevelState::~LevelState() {
 
 
 void LevelState::onEnter() {
-	m_lifeCycle = LifeCycle::HAS_ENTERED;
+	m_lifeCycle = StateLifeCycle::HAS_ENTERED;
 }
 
 void LevelState::update() {
@@ -30,12 +30,12 @@ void LevelState::update() {
 		system->update();
 	}
 
-	if (m_lifeCycle == LifeCycle::HAS_ENTERED)
-		m_lifeCycle = LifeCycle::HAS_UPDATED;
+	if (m_lifeCycle == StateLifeCycle::HAS_ENTERED)
+		m_lifeCycle = StateLifeCycle::HAS_UPDATED;
 }
 
 void LevelState::onExit() {
-	m_lifeCycle = LifeCycle::HAS_EXITED;
+	m_lifeCycle = StateLifeCycle::HAS_EXITED;
 }
 
 
