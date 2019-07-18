@@ -30,7 +30,8 @@ enum class Inputs {
 
 /**
  * @brief Stores action states as booleans, and button bindings to these states
- * @detail Singleton component, only one instance of it through the game
+ * @description Singleton component, only one instance of it through the game
+ * @detail Only modified by game, and read-only otherwise
  * 
  * @link https://youtu.be/W3aieHjyNvw?t=715 - Overwatch Gameplay Architecture
  */
