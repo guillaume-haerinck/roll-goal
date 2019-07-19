@@ -36,6 +36,7 @@ enum class StateLifeCycle {
 struct Context {
     StatesManager* statesManager = nullptr;
     entt::registry* registry = nullptr;
+    uint32_t singletonComponentsId;
 };
 
 /**

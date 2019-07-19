@@ -23,15 +23,11 @@ public:
 private:
     void initSDL();
     void initImgui() const;
-    void handleSdlEvents();
 
 private:
     SDL_Window* m_window;
     SDL_GLContext m_context;
     static bool m_instanciated;
     bool m_running;
-
-    entt::registry m_registry;
     StatesManager m_states;
-    Renderer m_renderer;
 };

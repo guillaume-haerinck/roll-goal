@@ -37,6 +37,8 @@ int main(int argc, char *argv[]) {
 }
 
 void gameLoop(void* data) {
+	// TODO handle deltatime and sleep
+
 	Game* game = static_cast<Game*>(data);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 

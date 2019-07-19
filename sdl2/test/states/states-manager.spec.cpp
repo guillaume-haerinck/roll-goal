@@ -5,8 +5,7 @@
 
 SCENARIO("StateManager can push, pop and handle transition of Game states") {
 	GIVEN("An empty StateManager") {
-		entt::registry registry;
-		StatesManager statesManager(registry);
+		StatesManager statesManager;
 		REQUIRE(statesManager.isEmpty() == true);
 
 		WHEN("we push one state") {
@@ -37,8 +36,7 @@ SCENARIO("StateManager can push, pop and handle transition of Game states") {
 	}
 
 	GIVEN("A StateManager with only one state") {
-		entt::registry registry;
-		StatesManager statesManager(registry);
+		StatesManager statesManager;
 		statesManager.push(STATE_LEVEL);
 
 		WHEN("we pop") {
@@ -51,8 +49,7 @@ SCENARIO("StateManager can push, pop and handle transition of Game states") {
 	}
 
 	GIVEN("A StateManager with multiple states") {
-		entt::registry registry;
-		StatesManager statesManager(registry);
+		StatesManager statesManager;
 		statesManager.push(STATE_TITLE_SCREEN);
 		auto state1 = statesManager.getActiveState();
 		statesManager.push(STATE_LEVEL);

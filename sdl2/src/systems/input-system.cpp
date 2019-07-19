@@ -1,6 +1,10 @@
 #include "input-system.h"
 
-InputSystem::InputSystem(entt::registry& registry) : ISystem(registry)
+#include <spdlog/spdlog.h>
+#include "components/singletons/game-input.h"
+
+InputSystem::InputSystem(entt::registry& registry, uint32_t singletonComponentsId) 
+: ISystem(registry), m_singletonComponentsId(singletonComponentsId)
 {
 }
 
@@ -9,15 +13,8 @@ InputSystem::~InputSystem()
 }
 
 void InputSystem::update() {
-/*
-
-    if (singletonInput.actionState.at(ACTION_TILT) == true) {
-        m_registry.view ...
+    scomp::GameInput& inputs = m_registry.get<scomp::GameInput>(m_singletonComponentsId);
+    if (inputs.actionState.at(ACTION_TILT) == true) {
+        spdlog::info("Tilt action enabled");
     }
-
-    if (singletonInput.actionState.at(ACTION_FOO) == true) {
-         m_registry.view ...
-    }
-    
-*/
 }

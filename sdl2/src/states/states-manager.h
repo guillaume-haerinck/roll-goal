@@ -1,6 +1,7 @@
 #pragma once
 
 #include <entt/entt.hpp>
+#include <SDL2/SDL.h>
 #include <array>
 #include <stack>
 #include <memory>
@@ -15,7 +16,7 @@
  */
 class StatesManager {
 public:
-    StatesManager(entt::registry& registry);
+    StatesManager();
 
     /**
      * @brief Add a state on top of the stack
@@ -34,12 +35,28 @@ public:
      */
     void update();
 
+    /**
+     * @brief Update the GameInput component
+     * @returns false if SDL_QUIT
+     */
+    bool handleSdlEvents();
+
 public:
 	std::shared_ptr<IState> getActiveState() const;
     bool isEmpty() const;
 
 private:
-    entt::registry& m_registry;
+    /**
+     * @brief Creates single-instance components used across the game to save some states
+     * @exemple Input handling
+     * 
+     * @return uint32_t - The id of the entity that holds them
+     */
+    uint32_t initSingletonComponents();
+
+private:
+    entt::registry m_registry;
     std::array<std::shared_ptr<IState>, _STATE_MAX_NUMBER> m_states;
     std::stack<std::shared_ptr<IState>> m_stateStack;
+    Context m_context;
 };

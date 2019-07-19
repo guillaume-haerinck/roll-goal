@@ -9,7 +9,7 @@
 
 bool Game::m_instanciated = false;
 
-Game::Game() : m_running(true), m_states(m_registry)
+Game::Game() : m_running(true)
 {
     assert(!m_instanciated);
 	m_instanciated = true;
@@ -19,7 +19,7 @@ Game::Game() : m_running(true), m_states(m_registry)
 	initSDL();
     initImgui();
 
-	m_states.push(STATE_TITLE_SCREEN);
+	m_states.push(STATE_LEVEL);
 }
 
 Game::~Game() {
@@ -36,6 +36,10 @@ Game::~Game() {
 
 
 void Game::update() {
+	if (!m_states.handleSdlEvents()) {
+		exit();
+	}
+
 	{
 		ImGui_ImplOpenGL3_NewFrame();
 		ImGui_ImplSDL2_NewFrame(getWindow());
@@ -50,10 +54,7 @@ void Game::update() {
 	{
 		ImGui::Render();
 		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-		m_renderer.draw();
 	}
-
-	handleSdlEvents();
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -105,26 +106,6 @@ void Game::initImgui() const {
     ImGui_ImplSDL2_InitForOpenGL(m_window, m_context);
 	ImGui_ImplOpenGL3_Init("#version 300 es");
 	ImGui::StyleColorsDark();
-}
-
-void Game::handleSdlEvents() {
-	SDL_Event e;
-	while (SDL_PollEvent(&e)) {
-		switch (e.type) {
-		case SDL_QUIT:
-			exit();
-			break;
-
-		// TODO update the singleton input component
-		case SDL_KEYDOWN:
-			spdlog::info("Key down");
-			break;
-
-		case SDL_MOUSEBUTTONDOWN:
-			spdlog::info("Button down");
-			break;
-		}
-	}
 }
 
 /////////////////////////////////////////////////////////////////////////////

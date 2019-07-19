@@ -17,19 +17,7 @@ enum Action {
 };
 
 /**
- * @brief Possible inputs in the game
- */
-enum class Inputs {
-    MOUSE_DOWN_LEFT,
-    MOUSE_DOWN_RIGHT,
-    MOUSE_DOWN_MIDDLE,
-    MOUSE_SCROLL_UP,
-    MOUSE_SCROLL_DOWN,
-    MOUSE_MOVE
-};
-
-/**
- * @brief Stores action states as booleans, and button bindings to these states
+ * @brief Stores action states as booleans
  * @description Singleton component, only one instance of it through the game
  * @detail Only modified by game, and read-only otherwise
  * 
@@ -37,8 +25,9 @@ enum class Inputs {
  */
 namespace scomp {
     struct GameInput {
+        GameInput() : actionState({ false }), mousePos(0.f) {}
+
         std::array<bool, _ACTION_MAX_NUMBER> actionState;
-        std::unordered_map<Inputs, Action> buttonBindings;
         glm::vec2 mousePos;
     };
 };

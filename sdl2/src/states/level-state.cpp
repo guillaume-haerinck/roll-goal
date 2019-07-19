@@ -2,12 +2,15 @@
 
 #include "systems/physic-system.h"
 #include "systems/render-system.h"
+#include "systems/input-system.h"
 
 LevelState::LevelState(Context context) : IState(STATE_LEVEL, context)
 {
-	m_systems.resize(2);
-	m_systems.at(0) = new PhysicSystem(*context.registry);
-	m_systems.at(1) = new RenderSystem(*context.registry);
+	m_systems = {
+		new PhysicSystem(*context.registry),
+		new RenderSystem(*context.registry),
+		new InputSystem(*context.registry, context.singletonComponentsId)
+	};
 }
 
 LevelState::~LevelState() {
