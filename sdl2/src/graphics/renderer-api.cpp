@@ -7,12 +7,10 @@ RendererApi::RendererApi() {
 
 RendererApi::~RendererApi() {
 }
-
-/* 
+ 
 void RendererApi::setClearColor(glm::vec4 color) {
 	GLCall(glClearColor(color.r, color.g, color.b, color.a));
 }
-*/
 
 void RendererApi::clear() {
 	GLCall(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));

@@ -3,13 +3,12 @@
 #include <string>
 #include <unordered_map>
 
-// #include "glm/glm.hpp"
+#include <glm/glm.hpp>
 
 /**
  * @brief 
  */
 class Shader {
-	/* 
 public:
 	Shader(const std::string& filepathVertex = "res/shaders/basic.vert", const std::string& filepathFragment = "res/shaders/basic.frag");
 	~Shader();
@@ -34,6 +33,5 @@ private:
 private:
 	unsigned int m_rendererID;
 	std::unordered_map<std::string, int> m_UniformLocationCache;
-	*/
 };
 
