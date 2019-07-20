@@ -1,5 +1,6 @@
 #include "shader.h"
 
+/* 
 #include <glad/glad.h>
 #include <fstream>
 #include <string>
@@ -133,3 +134,4 @@ int Shader::getUniformLocation(const std::string& name) {
 	m_UniformLocationCache[name] = location;
 	return location;
 }
+*/
