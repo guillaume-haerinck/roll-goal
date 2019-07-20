@@ -113,6 +113,8 @@ public:
 
     std::vector<BufferElement>::iterator begin() { return m_elements.begin(); }
     std::vector<BufferElement>::iterator end() { return m_elements.end(); }
+    std::vector<BufferElement>::const_iterator begin() const { return m_elements.begin(); }
+    std::vector<BufferElement>::const_iterator end() const { return m_elements.end(); }
 
 private:
     void calculateOffsetsAndStride() {
@@ -141,8 +143,6 @@ public:
 
     void setLayout(const BufferLayout& layout) { m_layout = layout; }
     const BufferLayout& getLayout() const { return m_layout; }
-
-public:
     void bind() const;
     void unbind() const;
 
@@ -160,10 +160,8 @@ public:
     IndexBuffer(const unsigned int* data, unsigned int count);
     ~IndexBuffer();
 
-public:
     void bind() const;
     void unbind() const;
-
     inline unsigned int getCount() const { return m_count; }
 
 private:
