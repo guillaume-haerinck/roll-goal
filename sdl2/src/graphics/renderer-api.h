@@ -16,6 +16,4 @@ public:
 
 	void drawIndexed(const std::shared_ptr<VertexArray>& vertexArray);
 
-private:
-
 };
