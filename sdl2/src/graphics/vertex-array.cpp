@@ -21,6 +21,7 @@ void VertexArray::addVertexBuffer(const std::shared_ptr<VertexBuffer>& vertexBuf
 	uint32_t index = 0;
 	const auto& layout = vertexBuffer->getLayout();
 	for (const auto& element : layout) {
+		GLCall(glEnableVertexAttribArray(index));
 		GLCall(glVertexAttribPointer(index,
 			element.getComponentCount(),
 			element.getOpenGlBaseType(),

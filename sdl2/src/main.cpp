@@ -32,18 +32,18 @@ int main(int argc, char *argv[]) {
 	Game* game = new Game();
 
 	// TEMP
-	VertexArray va;
 	float vertices[] = {
 		-0.5f, -0.5f, 0.0f,
 		 0.5f, -0.5f, 0.0f,
 		 0.0f,  0.5f, 0.0f
 	};
-
 	std::shared_ptr<VertexBuffer> vb = std::make_shared<VertexBuffer>(vertices, sizeof(vertices));
 	BufferLayout layout = {
 		{ ShaderDataType::Float3, "position" }
 	};
 	vb->setLayout(layout);
+
+	VertexArray va;
 	va.addVertexBuffer(vb);
 
 	Shader shader;
@@ -69,7 +69,7 @@ void gameLoop(void* data) {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	// TEMP
-	GLCall(glDrawArrays(GL_POINTS, 0, 9));
+	GLCall(glDrawArrays(GL_TRIANGLES, 0, 3));
 
 	game->update();
 	
