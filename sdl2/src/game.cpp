@@ -63,8 +63,7 @@ void Game::update() {
 
 
 void Game::initSDL() {
-	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER) != 0)
-	{
+	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER) != 0) {
 		spdlog::critical("[SDL2] Unable to initialize SDL: {}", SDL_GetError());
 		debug_break();
 	}

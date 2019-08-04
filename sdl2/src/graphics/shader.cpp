@@ -1,6 +1,5 @@
 #include "shader.h"
 
-/* 
 #include <glad/glad.h>
 #include <fstream>
 #include <string>
@@ -55,8 +54,8 @@ unsigned int Shader::compileShader(unsigned int type, const std::string& source)
 		glGetShaderInfoLog(id, length, &length, message);
 		auto const typeString = [type]() {
 			switch (type) {
-			case GL_VERTEX_SHADER: return "fragment";
-			case GL_FRAGMENT_SHADER: return "vertex";
+			case GL_VERTEX_SHADER: return "vertex";
+			case GL_FRAGMENT_SHADER: return "fragment";
 			default: return "unknown type";
 			}
 		}();
@@ -134,4 +133,3 @@ int Shader::getUniformLocation(const std::string& name) {
 	m_UniformLocationCache[name] = location;
 	return location;
 }
-*/

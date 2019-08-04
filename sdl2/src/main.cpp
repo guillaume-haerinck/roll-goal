@@ -15,6 +15,13 @@
 
 #include "game.h"
 
+// TEMP
+#include <memory>
+#include "graphics/gl-log-handler.h"
+#include "graphics/buffer.h"
+#include "graphics/shader.h"
+#include "graphics/vertex-array.h"
+
 void gameLoop(void* data);
 
 int main(int argc, char *argv[]) {
@@ -23,6 +30,25 @@ int main(int argc, char *argv[]) {
 	#endif
 
 	Game* game = new Game();
+
+	// TEMP
+	VertexArray va;
+	float vertices[] = {
+		-0.5f, -0.5f, 0.0f,
+		 0.5f, -0.5f, 0.0f,
+		 0.0f,  0.5f, 0.0f
+	};
+
+	std::shared_ptr<VertexBuffer> vb = std::make_shared<VertexBuffer>(vertices, sizeof(vertices));
+	BufferLayout layout = {
+		{ ShaderDataType::Float3, "position" }
+	};
+	vb->setLayout(layout);
+	va.addVertexBuffer(vb);
+
+	Shader shader;
+	shader.bind();
+	va.bind();
 
 	#ifdef __EMSCRIPTEN__
 		emscripten_set_main_loop_arg(gameLoop, (void *) game, 0, 0);
@@ -41,6 +67,9 @@ void gameLoop(void* data) {
 
 	Game* game = static_cast<Game*>(data);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	// TEMP
+	GLCall(glDrawArrays(GL_POINTS, 0, 9));
 
 	game->update();
 	

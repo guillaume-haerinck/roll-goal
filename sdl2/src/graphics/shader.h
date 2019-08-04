@@ -10,7 +10,7 @@
  */
 class Shader {
 public:
-	Shader(const std::string& filepathVertex = "res/shaders/basic.vert", const std::string& filepathFragment = "res/shaders/basic.frag");
+	Shader(const std::string& filepathVertex = "res/shaders/basic/basic.vert", const std::string& filepathFragment = "res/shaders/basic/basic.frag");
 	~Shader();
 
 	void bind() const;
