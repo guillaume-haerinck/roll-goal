@@ -67,3 +67,4 @@ The test target is build by default. To run it, you can launch the `TEST_ROLL_GO
 ## Inspired by
 
 - [WacMan](https://github.com/carlfindahl/wacman) - A pacman clone made with ENTT
+- [Hazel Engine](https://github.com/TheCherno/Hazel) - A game engine made by Cherno and explained in his youtube series
