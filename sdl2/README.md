@@ -64,6 +64,8 @@ The test target is build by default. To run it, you can launch the `TEST_ROLL_GO
 
 - [ENTT](https://github.com/skypjack/entt) - An ECS library
 
+TODO use [EA Webkit](https://gpl.ea.com/eawebkit.html) or [CEF](https://bitbucket.org/chromiumembedded/cef/src/master/)
+
 ## Inspired by
 
 - [WacMan](https://github.com/carlfindahl/wacman) - A pacman clone made with ENTT
