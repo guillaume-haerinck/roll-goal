@@ -44,9 +44,9 @@ if (WIN32)
     )
 else()
     if (UNIX)
-        set(CMAKE_PREFIX_PATH ${CMAKE_SOURCE_DIR}/lib/ultralight-1.0/lib/linux)
+        set(CMAKE_PREFIX_PATH ${CMAKE_SOURCE_DIR}/lib/ultralight-1.0/bin/linux)
     elseif (APPLE)
-        set(CMAKE_PREFIX_PATH ${CMAKE_SOURCE_DIR}/lib/ultralight-1.0/lib/mac)
+        set(CMAKE_PREFIX_PATH ${CMAKE_SOURCE_DIR}/lib/ultralight-1.0/bin/mac)
     endif()
 
     find_library(ULTRALIGHT_LIB Ultralight)
@@ -90,7 +90,7 @@ target_link_libraries(
     IMGUI
 )
 
-if (UNIX) # Use dynamic linking library
+if (NOT WIN32)
     target_link_libraries(${PROJECT_NAME} -ldl)
 endif()
 

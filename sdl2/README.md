@@ -69,3 +69,11 @@ The test target is build by default. To run it, you can launch the `TEST_ROLL_GO
 
 - [WacMan](https://github.com/carlfindahl/wacman) - A pacman clone made with ENTT
 - [Hazel Engine](https://github.com/TheCherno/Hazel) - A game engine made by Cherno and explained in his youtube series
+
+
+## TODO notes
+
+for linux
+```bash
+sudo cp lib/ultralight-1.0/bin/linux/libWebCore.so /usr/lib
+```
