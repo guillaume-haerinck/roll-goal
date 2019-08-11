@@ -27,6 +27,6 @@ script:
   - cmake . -DCMAKE_BUILD_TYPE=Release
   - cmake --build .
   - ./bin/TEST_ROLL_GOAL
-  - rm CMakeCache.txt
-  - conan install ./wasm.recipe.py --build missing --install-folder wasm -pr ./wasm.profile
-  - conan build ./wasm.recipe.py --build-folder wasm
+  #- rm CMakeCache.txt
+  #- conan install ./wasm.recipe.py --build missing --install-folder wasm -pr ./wasm.profile
+  #- conan build ./wasm.recipe.py --build-folder wasm
