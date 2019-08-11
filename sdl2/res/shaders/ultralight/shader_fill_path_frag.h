@@ -4,6 +4,7 @@ static std::string shader_fill_path_frag() {
   return R"(#version 300 es
 
 precision highp float;
+precision highp int;
 
 // Program Uniforms
 uniform vec4 State;

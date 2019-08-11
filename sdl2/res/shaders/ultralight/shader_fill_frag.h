@@ -4,6 +4,7 @@ static const std::string shader_fill_frag1 = R"(
 #version 300 es
 
 precision highp float;
+precision highp int;
 
 // Program Uniforms
 uniform vec4 State;
