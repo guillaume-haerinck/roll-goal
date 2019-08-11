@@ -63,8 +63,7 @@ The test target is build by default. To run it, you can launch the `TEST_ROLL_GO
 ## Dependencies
 
 - [ENTT](https://github.com/skypjack/entt) - An ECS library
-
-TODO use [EA Webkit](https://gpl.ea.com/eawebkit.html) or [CEF](https://bitbucket.org/chromiumembedded/cef/src/master/)
+- [Ultralight](https://ultralig.ht/) - Web engine for user interfaces
 
 ## Inspired by
 
