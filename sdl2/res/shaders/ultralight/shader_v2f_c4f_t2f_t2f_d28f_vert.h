@@ -3,14 +3,12 @@
 static std::string shader_v2f_c4f_t2f_t2f_d28f_vert() {
   return R"(#version 300 es
 
-precision highp float;
-
 // Program Uniforms
 uniform vec4 State;
 uniform mat4 Transform;
 uniform vec4 Scalar4[2];
 uniform vec4 Vector[8];
-uniform uint ClipSize;
+uniform int ClipSize;
 uniform mat4 Clip[8];
 
 // Uniform Accessor Functions
@@ -18,7 +16,7 @@ float Time() { return State[0]; }
 float ScreenWidth() { return State[1]; }
 float ScreenHeight() { return State[2]; }
 float ScreenScale() { return State[3]; }
-float Scalar(uint i) { if (i < 4u) return Scalar4[0][i]; else return Scalar4[1][i - 4u]; }
+float Scalar(int i) { if (i < 4) return Scalar4[0][i]; else return Scalar4[1][i - 4]; }
 
 // Vertex Attributes
 in vec2 in_Position;

@@ -10,7 +10,7 @@ uniform vec4 State;
 uniform mat4 Transform;
 uniform vec4 Scalar4[2];
 uniform vec4 Vector[8];
-uniform uint ClipSize;
+uniform int ClipSize;
 uniform mat4 Clip[8];
 
 // Uniform Accessor Functions
@@ -18,7 +18,7 @@ float Time() { return State[0]; }
 float ScreenWidth() { return State[1]; }
 float ScreenHeight() { return State[2]; }
 float ScreenScale() { return State[3]; }
-float Scalar(uint i) { if (i < 4u) return Scalar4[0][i]; else return Scalar4[1][i - 4u]; }
+float Scalar(int i) { if (i < 4) return Scalar4[0][i]; else return Scalar4[1][i - 4]; }
 
 // Vertex Attributes
 in vec4 ex_Color;
@@ -144,7 +144,7 @@ float antialias(in float d, in float width, in float median) {
 }
 
 void applyClip() {
-  for (uint i = 0u; i < ClipSize; i++) {
+  for (int i = 0; i < ClipSize; i++) {
     mat4 data = Clip[i];
     vec2 origin = data[0].xy;
     vec2 size = data[0].zw;

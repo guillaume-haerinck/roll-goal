@@ -79,7 +79,7 @@ public:
   void LoadProgram(ProgramType type);
   void SelectProgram(ProgramType type);
   void UpdateUniforms(const GPUState &state);
-  void SetUniform1ui(const char *name, GLuint val);
+  void SetUniform1i(const char *name, GLint val);
   void SetUniform1f(const char *name, float val);
   void SetUniform1fv(const char *name, size_t count, const float *val);
   void SetUniform4f(const char *name, const float val[4]);

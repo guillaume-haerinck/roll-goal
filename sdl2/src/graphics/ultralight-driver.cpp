@@ -618,14 +618,14 @@ void UltralightDriver::UpdateUniforms(const GPUState &state)
   CHECK_GL();
   SetUniform4fv("Vector", 8, &state.uniform_vector[0].value[0]);
   CHECK_GL();
-  SetUniform1ui("ClipSize", state.clip_size);
+  SetUniform1i("ClipSize", state.clip_size);
   CHECK_GL();
   SetUniformMatrix4fv("Clip", 8, &state.clip[0].data[0]);
 }
 
-void UltralightDriver::SetUniform1ui(const char *name, GLuint val)
+void UltralightDriver::SetUniform1i(const char *name, GLint val)
 {
-  glUniform1ui(glGetUniformLocation(cur_program_id_, name), val);
+  glUniform1i(glGetUniformLocation(cur_program_id_, name), val);
 }
 
 void UltralightDriver::SetUniform1f(const char *name, float val)

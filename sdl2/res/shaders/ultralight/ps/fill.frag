@@ -7,7 +7,7 @@ uniform vec4 State;
 uniform mat4 Transform;
 uniform vec4 Scalar4[2];
 uniform vec4 Vector[8];
-uniform uint ClipSize;
+uniform int ClipSize;
 uniform mat4 Clip[8];
 
 // Uniform Accessor Functions
@@ -15,7 +15,7 @@ float Time() { return State[0]; }
 float ScreenWidth() { return State[1]; }
 float ScreenHeight() { return State[2]; }
 float ScreenScale() { return State[3]; }
-float Scalar(uint i) { if (i < 4u) return Scalar4[0][i]; else return Scalar4[1][i - 4u]; }
+float Scalar(int i) { if (i < 4) return Scalar4[0][i]; else return Scalar4[1][i - 4]; }
 
 // Texture Units
 uniform sampler2D Texture1;
@@ -38,13 +38,13 @@ in vec4 ex_Data6;
 // Out Params
 out vec4 out_Color;
 
-uint FillType() { return uint(ex_Data0.x); }
+int FillType() { return int(ex_Data0.x); }
 vec4 TileRectUV() { return Vector[0]; }
 vec2 TileSize() { return Vector[1].zw; }
 vec2 PatternTransformA() { return Vector[2].xy; }
 vec2 PatternTransformB() { return Vector[2].zw; }
 vec2 PatternTransformC() { return Vector[3].xy; }
-uint Gradient_NumStops() { return uint(ex_Data0.y); }
+int Gradient_NumStops() { return int(ex_Data0.y); }
 bool Gradient_IsRadial() { return bool(ex_Data0.z); }
 float Gradient_R0() { return ex_Data1.x; }
 float Gradient_R1() { return ex_Data1.y; }
@@ -54,21 +54,21 @@ float SDFMaxDistance() { return ex_Data0.y; }
 
 struct GradientStop { float percent; vec4 color; };
 
-GradientStop GetGradientStop(uint offset) {
+GradientStop GetGradientStop(int offset) {
   GradientStop result;
-  if (offset < 4u) {
+  if (offset < 4) {
     result.percent = ex_Data2[offset];
-    if (offset == 0u)
+    if (offset == 0)
       result.color = ex_Data3;
-    else if (offset == 1u)
+    else if (offset == 1)
       result.color = ex_Data4;
-    else if (offset == 2u)
+    else if (offset == 2)
       result.color = ex_Data5;
-    else if (offset == 3u)
+    else if (offset == 3)
       result.color = ex_Data6;
   } else {
-    result.percent = Scalar(offset - 4u);
-    result.color = Vector[offset - 4u];
+    result.percent = Scalar(offset - 4);
+    result.color = Vector[offset - 4];
   }
   return result;
 }
@@ -243,23 +243,23 @@ void fillPatternGradient() {
   if (!is_radial) {
     vec2 V = p1 - p0;
     float t = dot(ex_TexCoord - p0, V) / dot(V, V);
-    GradientStop stop0 = GetGradientStop(0u);
-    GradientStop stop1 = GetGradientStop(1u);
+    GradientStop stop0 = GetGradientStop(0);
+    GradientStop stop1 = GetGradientStop(1);
     out_Color = mix(stop0.color, stop1.color, ramp(stop0.percent, stop1.percent, t));
     if (num_stops > 2) {
-      GradientStop stop2 = GetGradientStop(2u);
+      GradientStop stop2 = GetGradientStop(2);
       out_Color = mix(out_Color, stop2.color, ramp(stop1.percent, stop2.percent, t));
       if (num_stops > 3) {
-        GradientStop stop3 = GetGradientStop(3u);
+        GradientStop stop3 = GetGradientStop(3);
         out_Color = mix(out_Color, stop3.color, ramp(stop2.percent, stop3.percent, t));
         if (num_stops > 4) {
-          GradientStop stop4 = GetGradientStop(4u);
+          GradientStop stop4 = GetGradientStop(4);
           out_Color = mix(out_Color, stop4.color, ramp(stop3.percent, stop4.percent, t));
           if (num_stops > 5) {
-            GradientStop stop5 = GetGradientStop(5u);
+            GradientStop stop5 = GetGradientStop(5);
             out_Color = mix(out_Color, stop5.color, ramp(stop4.percent, stop5.percent, t));
             if (num_stops > 6) {
-              GradientStop stop6 = GetGradientStop(6u);
+              GradientStop stop6 = GetGradientStop(6);
               out_Color = mix(out_Color, stop6.color, ramp(stop5.percent, stop6.percent, t));
             }
           }
@@ -618,30 +618,30 @@ vec3 blendLuminosity(vec3 src, vec3 dest) {
 }
 
 vec4 calcBlend() {
-  const uint BlendMode_Normal = 1u;
-  const uint BlendMode_Multiply = 2u;
-  const uint BlendMode_Screen = 3u;
-  const uint BlendMode_Darken = 4u;
-  const uint BlendMode_Lighten = 5u;
-  const uint BlendMode_Overlay = 6u;
-  const uint BlendMode_ColorDodge = 7u;
-  const uint BlendMode_ColorBurn = 8u;
-  const uint BlendMode_HardLight = 9u;
-  const uint BlendMode_SoftLight = 10u;
-  const uint BlendMode_Difference = 11u;
-  const uint BlendMode_Exclusion = 12u;
-  const uint BlendMode_Hue = 13u;
-  const uint BlendMode_Saturation = 14u;
-  const uint BlendMode_Color = 15u;
-  const uint BlendMode_Luminosity = 16u;
-  const uint BlendMode_PlusDarker = 17u;
-  const uint BlendMode_PlusLighter = 18u;
+  const int BlendMode_Normal = 1;
+  const int BlendMode_Multiply = 2;
+  const int BlendMode_Screen = 3;
+  const int BlendMode_Darken = 4;
+  const int BlendMode_Lighten = 5;
+  const int BlendMode_Overlay = 6;
+  const int BlendMode_ColorDodge = 7;
+  const int BlendMode_ColorBurn = 8;
+  const int BlendMode_HardLight = 9;
+  const int BlendMode_SoftLight = 10;
+  const int BlendMode_Difference = 11;
+  const int BlendMode_Exclusion = 12;
+  const int BlendMode_Hue = 13;
+  const int BlendMode_Saturation = 14;
+  const int BlendMode_Color = 15;
+  const int BlendMode_Luminosity = 16;
+  const int BlendMode_PlusDarker = 17;
+  const int BlendMode_PlusLighter = 18;
 
   fillImage(ex_TexCoord);
   vec4 src = out_Color;
   vec4 dest = texture(Texture2, ex_ObjectCoord);
 
-  switch(uint(ex_Data0.y))
+  switch(int(ex_Data0.y))
   {
   case BlendMode_Normal: return src; 
   case BlendMode_Multiply: return vec4(src.rgb * dest.rgb * src.a, dest.a * src.a);
@@ -677,7 +677,7 @@ void fillMask() {
 }
 
 void applyClip() {
-  for (uint i = 0u; i < ClipSize; i++) {
+  for (int i = 0; i < ClipSize; i++) {
     mat4 data = Clip[i];
     vec2 origin = data[0].xy;
     vec2 size = data[0].zw;
@@ -699,17 +699,17 @@ void applyClip() {
 }
 
 void main(void) {
-  const uint FillType_Solid = 0u;
-  const uint FillType_Image = 1u;
-  const uint FillType_Pattern_Image = 2u;
-  const uint FillType_Pattern_Gradient = 3u;
-  const uint FillType_Fill_SDF = 4u;
-  const uint FillType_Stroke_SDF = 5u;
-  const uint FillType_Box_Decorations = 6u;
-  const uint FillType_Rounded_Rect = 7u;
-  const uint FillType_Box_Shadow = 8u;
-  const uint FillType_Blend = 9u;
-  const uint FillType_Mask = 10u;
+  const int FillType_Solid = 0;
+  const int FillType_Image = 1;
+  const int FillType_Pattern_Image = 2;
+  const int FillType_Pattern_Gradient = 3;
+  const int FillType_Fill_SDF = 4;
+  const int FillType_Stroke_SDF = 5;
+  const int FillType_Box_Decorations = 6;
+  const int FillType_Rounded_Rect = 7;
+  const int FillType_Box_Shadow = 8;
+  const int FillType_Blend = 9;
+  const int FillType_Mask = 10;
 
   switch (FillType())
   {
