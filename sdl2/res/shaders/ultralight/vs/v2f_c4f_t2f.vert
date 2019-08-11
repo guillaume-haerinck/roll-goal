@@ -1,4 +1,6 @@
-#version 150
+#version 300 es
+
+precision highp float;
 
 // Program Uniforms
 uniform vec4 State;

@@ -1,4 +1,6 @@
-#version 150
+#version 300 es
+
+precision highp float;
 
 // Program Uniforms
 uniform vec4 State;
@@ -179,8 +181,8 @@ float sdRoundRect(vec2 p, vec2 size, vec4 rx, vec4 ry) {
 void fillSolid() {
   vec2 size = ex_Data1.xy;
   vec2 p = ex_TexCoord * size;
-  float alpha_x = min(antialias(p.x, AA_WIDTH, 1.0), 1.0 - antialias(p.x, AA_WIDTH, size.x - 1));
-  float alpha_y = min(antialias(p.y, AA_WIDTH, 1.0), 1.0 - antialias(p.y, AA_WIDTH, size.y - 1));
+  float alpha_x = min(antialias(p.x, AA_WIDTH, 1.0), 1.0 - antialias(p.x, AA_WIDTH, size.x - 1.0));
+  float alpha_y = min(antialias(p.y, AA_WIDTH, 1.0), 1.0 - antialias(p.y, AA_WIDTH, size.y - 1.0));
   float alpha = min(alpha_x, alpha_y) * ex_Color.a;
   out_Color = vec4(ex_Color.rgb * alpha, alpha);
 }

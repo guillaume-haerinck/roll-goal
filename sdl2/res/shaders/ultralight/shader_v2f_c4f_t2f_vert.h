@@ -1,7 +1,9 @@
 #include <string>
 
 static std::string shader_v2f_c4f_t2f_vert() {
-  return R"(#version 150
+  return R"(#version 300 es
+
+precision highp float;
 
 // Program Uniforms
 uniform vec4 State;

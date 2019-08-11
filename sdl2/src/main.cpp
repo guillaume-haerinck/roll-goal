@@ -77,7 +77,7 @@ int main(int argc, char *argv[]) {
 		while (game->isRunning()) {
 			// gameLoop((void *) game);
 
-			// TEMP
+			// ------------------ TEMP ----------------
 			glClear(GL_COLOR_BUFFER_BIT);
 
 			renderer->Update();
@@ -103,6 +103,8 @@ int main(int argc, char *argv[]) {
 			GLCall(glDrawElements(GL_TRIANGLES, ib->getCount(), GL_UNSIGNED_INT, (void*) 0));
 
 			game->update();
+
+			// ------------------- END TEMP ----------------
 
 			SDL_GL_SwapWindow(game->getWindow());
 		}
