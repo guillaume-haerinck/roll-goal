@@ -12,13 +12,27 @@ Then you can add the server which contains the dependencies of the project :
 conan remote add bincrafters https://api.bintray.com/conan/bincrafters/public-conan
 ```
 
-### Build for your machine
+If you are on Linux or Mac there is one step remaining :
+
+#### On linux
+
+```bash
+sudo cp lib/ultralight-1.0/bin/linux/libWebCore.so /usr/lib
+```
+
+#### On mac
+
+```bash
+sudo cp lib/ultralight-1.0/bin/mac/libWebCore.so /usr/lib
+```
+
+### Build
 
 You can handle the `CMakeLists.txt` in any way you like, it will download the dependecies by itself. 
 
 Here's some way to use it :
 
-#### `Option 1: Bash (Linux only)`
+#### `Option 1: CLI`
 
 ```bash
 cmake . -DCMAKE_BUILD_TYPE=Release
@@ -31,11 +45,13 @@ You can then run the project with `./bin/roll-goal`
 
 Open this folder with the `CMake...` option in file->open on Visual Studio, and run the project.
 
-#### `Option 3: VSCode (Cross-Platform)`
+#### `Option 3: VSCode`
 
 Use the `CMakeTools` plugin, build with `f7` then run with `f5` (But be carefull to be on the right platform, there is a launch file for windows and for linux).
 
 ### Build as Web Assembly
+
+*As Ultralight lib is not yet available as Emscripten builds, web assembly is broken*
 
 This project support Web Assembly, so it can run in a browser like Google Chrome or Firefox !
 
@@ -69,11 +85,3 @@ The test target is build by default. To run it, you can launch the `TEST_ROLL_GO
 
 - [WacMan](https://github.com/carlfindahl/wacman) - A pacman clone made with ENTT
 - [Hazel Engine](https://github.com/TheCherno/Hazel) - A game engine made by Cherno and explained in his youtube series
-
-
-## TODO notes
-
-for linux
-```bash
-sudo cp lib/ultralight-1.0/bin/linux/libWebCore.so /usr/lib
-```

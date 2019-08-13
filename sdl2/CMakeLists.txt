@@ -55,6 +55,12 @@ else()
     set(ULTRALIGHT_LIBRARIES ${ULTRALIGHT_LIB} ${ULTRALIGHT_CORE_LIB} ${WEB_CORE_LIB})
 endif()
 
+if (ULTRALIGHT_LIBRARIES)
+    message("Found Ultralight : "  ${ULTRALIGHT_LIBRARIES})
+else()
+    message("Error : Ultralight not found !")
+endif()
+
 # ------------------------- BUILD DEPENDENCIES IF NEEDED ----------------------
 
 add_library(GLAD STATIC "lib/glad/src/glad.c")
