@@ -35,31 +35,31 @@ file(GLOB_RECURSE MY_SOURCES src/*)
 # /////////////////////////////////////////////////////////////////////////////
 
 find_package(OpenGL REQUIRED)
-if (WIN32)
-    set(
-        ULTRALIGHT_LIBRARIES 
-        ${CMAKE_SOURCE_DIR}/lib/ultralight-1.0/lib/win/x64/Ultralight.lib;
-        ${CMAKE_SOURCE_DIR}/lib/ultralight-1.0/lib/win/x64/UltralightCore.lib;
-        ${CMAKE_SOURCE_DIR}/lib/ultralight-1.0/lib/win/x64/WebCore.lib;
-    )
-else()
-    if (UNIX)
-        set(CMAKE_PREFIX_PATH ${CMAKE_SOURCE_DIR}/lib/ultralight-1.0/bin/linux)
-    elseif (APPLE)
-        set(CMAKE_PREFIX_PATH ${CMAKE_SOURCE_DIR}/lib/ultralight-1.0/bin/mac)
-    endif()
-
-    find_library(ULTRALIGHT_LIB Ultralight)
-    find_library(ULTRALIGHT_CORE_LIB UltralightCore)
-    find_library(WEB_CORE_LIB WebCore)
-    set(ULTRALIGHT_LIBRARIES ${ULTRALIGHT_LIB} ${ULTRALIGHT_CORE_LIB} ${WEB_CORE_LIB})
-endif()
-
-if (ULTRALIGHT_LIBRARIES)
-    message("Found Ultralight : "  ${ULTRALIGHT_LIBRARIES})
-else()
-    message("Error : Ultralight not found !")
-endif()
+#if (WIN32)
+#    set(
+#        ULTRALIGHT_LIBRARIES 
+#        ${CMAKE_SOURCE_DIR}/lib/ultralight-1.0/lib/win/x64/Ultralight.lib;
+#        ${CMAKE_SOURCE_DIR}/lib/ultralight-1.0/lib/win/x64/UltralightCore.lib;
+#        ${CMAKE_SOURCE_DIR}/lib/ultralight-1.0/lib/win/x64/WebCore.lib;
+#    )
+#else()
+#    if (UNIX)
+#        set(CMAKE_PREFIX_PATH ${CMAKE_SOURCE_DIR}/lib/ultralight-1.0/bin/linux)
+#    elseif (APPLE)
+#        set(CMAKE_PREFIX_PATH ${CMAKE_SOURCE_DIR}/lib/ultralight-1.0/bin/mac)
+#    endif()
+#
+#    find_library(ULTRALIGHT_LIB Ultralight)
+#    find_library(ULTRALIGHT_CORE_LIB UltralightCore)
+#    find_library(WEB_CORE_LIB WebCore)
+#    set(ULTRALIGHT_LIBRARIES ${ULTRALIGHT_LIB} ${ULTRALIGHT_CORE_LIB} ${WEB_CORE_LIB})
+#endif()
+#
+#if (ULTRALIGHT_LIBRARIES)
+#    message("Found Ultralight : "  ${ULTRALIGHT_LIBRARIES})
+#else()
+#    message("Error : Ultralight not found !")
+#endif()
 
 # ------------------------- BUILD DEPENDENCIES IF NEEDED ----------------------
 
@@ -73,7 +73,7 @@ add_library(IMGUI STATIC "lib/imgui/imgui_impl_opengl3.cpp" "lib/imgui/imgui_imp
 
 include_directories(
     ${OPENGL_INCLUDE_DIR}
-    lib/ultralight-1.0/include
+    # lib/ultralight-1.0/include
     lib/glad/include
     lib
     src
@@ -90,7 +90,7 @@ target_link_libraries(
     ${PROJECT_NAME}
     ${CONAN_LIBS}
     ${OPENGL_LIBRARIES}
-    ${ULTRALIGHT_LIBRARIES}
+    # ${ULTRALIGHT_LIBRARIES}
     GLAD
     STB_IMAGE
     IMGUI
@@ -112,7 +112,7 @@ if (NOT EMSCRIPTEN)
         TEST_ROLL_GOAL
         ${CONAN_LIBS}
         ${OPENGL_LIBRARIES}
-        ${ULTRALIGHT_LIBRARIES}
+        #${ULTRALIGHT_LIBRARIES}
         GLAD
         STB_IMAGE
         IMGUI
@@ -135,10 +135,10 @@ endif()
 # //////////////////////////////// POST-BUILD /////////////////////////////////
 # /////////////////////////////////////////////////////////////////////////////
 
-if (WIN32)
-    add_custom_command(
-        TARGET ${PROJECT_NAME} POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy_directory
-        "${PROJECT_SOURCE_DIR}/lib/ultralight-1.0/bin/win/x64" $<TARGET_FILE_DIR:${PROJECT_NAME}>
-    )
-endif()
+#if (WIN32)
+#    add_custom_command(
+#        TARGET ${PROJECT_NAME} POST_BUILD
+#        COMMAND ${CMAKE_COMMAND} -E copy_directory
+#        "${PROJECT_SOURCE_DIR}/lib/ultralight-1.0/bin/win/x64" $<TARGET_FILE_DIR:${PROJECT_NAME}>
+#    )
+#endif()

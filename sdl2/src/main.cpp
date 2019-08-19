@@ -16,6 +16,7 @@
 #include "game.h"
 
 // TEMP
+/*
 #include <memory>
 #include <Ultralight/Ultralight.h>
 #include "graphics/gl-log-handler.h"
@@ -23,6 +24,7 @@
 #include "graphics/shader.h"
 #include "graphics/vertex-array.h"
 #include "graphics/ultralight-driver.h"
+*/
 
 void gameLoop(void* data);
 
@@ -33,6 +35,7 @@ int main(int argc, char *argv[]) {
 
 	Game* game = new Game();
 
+	/*
 	// ---------------- TEMP -----------------
 	// Setup ultralight
     auto& platform = ultralight::Platform::instance();
@@ -70,14 +73,16 @@ int main(int argc, char *argv[]) {
     Shader shader("res/shaders/basic/texture.vert", "res/shaders/basic/texture.frag");
 
 	// ------------- END TEMP ----------------
+	*/
 
 	#ifdef __EMSCRIPTEN__
 		emscripten_set_main_loop_arg(gameLoop, (void *) game, 0, 0);
 	#else
 		while (game->isRunning()) {
-			// gameLoop((void *) game);
+			gameLoop((void *) game);
 
 			// ------------------ TEMP ----------------
+			/*
 			glClear(GL_COLOR_BUFFER_BIT);
 
 			renderer->Update();
@@ -105,12 +110,9 @@ int main(int argc, char *argv[]) {
 			game->update();
 
 			// ------------------- END TEMP ----------------
-
-			SDL_GL_SwapWindow(game->getWindow());
+			*/
 		}
 	#endif
-
-	delete driver;
 
 	delete game;
 	return 0;
@@ -118,11 +120,11 @@ int main(int argc, char *argv[]) {
 
 void gameLoop(void* data) {
 	// TODO handle deltatime and sleep
-
-	Game* game = static_cast<Game*>(data);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+	Game* game = static_cast<Game*>(data);
+
 	game->update();
-	
+
 	SDL_GL_SwapWindow(game->getWindow());
 }
