@@ -1,36 +1,31 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class Timer : MonoBehaviour
 {
-
-    public Text TimerText;
-    public Text UIText;
-    public float TimeLimit;
-
-    private float theTimer;
+    public Text timerText;
+    public Text uiText;
+    public float timeLimit;
+    private float m_timer;
 
     void Start()
     {
-        theTimer = TimeLimit;
+        m_timer = timeLimit;
     }
 
     void Update()
     {
-        theTimer -= Time.deltaTime;
+        m_timer -= Time.deltaTime;
 
-        if (theTimer > 0f)
+        if (m_timer > 0f)
         {
-            TimerText.text = theTimer.ToString("00.00");
+            timerText.text = m_timer.ToString("00.00");
         }
-        
-        if (theTimer <= 0f)
+        else
         {
-            TimerText.text = "00.00";
-            UIText.text = "Temps écoulé";
+            timerText.text = "00.00";
+            uiText.text = "Temps écoulé";
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }

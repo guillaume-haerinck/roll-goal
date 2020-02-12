@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class BoardController : MonoBehaviour
 {
@@ -22,13 +20,12 @@ public class BoardController : MonoBehaviour
                 Mathf.Clamp(transform.rotation.x, -rotationMaxX, rotationMaxX),
                 transform.rotation.y,
                 Mathf.Clamp(transform.rotation.z, -rotationMaxZ, rotationMaxZ),
-                transform.rotation.w);
+                transform.rotation.w
+            );
         }
-
         else
         {
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.identity, returnSpeed * Time.deltaTime);
         }
-        
     }
 }

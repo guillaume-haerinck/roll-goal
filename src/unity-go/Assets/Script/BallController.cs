@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine.UI;
+﻿using UnityEngine.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,36 +6,34 @@ public class BallController : MonoBehaviour {
 
     public Text UIText;
     public float speed;
-    public float velocityTime;
-
-    private Rigidbody rb;
+    public float velocityAttenuation;
+    private Rigidbody m_rb;
 
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        m_rb = GetComponent<Rigidbody>();
     }
 
     void FixedUpdate()
     {
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
-
         Vector3 movement = new Vector3(-moveHorizontal, 0.0f, -moveVertical);
 
-        rb.AddForce(movement * speed, ForceMode.VelocityChange); ;
-        rb.velocity *= velocityTime; 
+        m_rb.AddForce(movement * speed, ForceMode.VelocityChange);
+        m_rb.velocity *= velocityAttenuation;
     }
 
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Finish"))
         {
-            UIText.text = "Gagne";
+            UIText.text = "Won";
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        }
-        if (other.gameObject.CompareTag("Respawn"))
+        } 
+        else if (other.gameObject.CompareTag("Respawn"))
         {
-            UIText.text = "Perdu";
+            UIText.text = "Lost";
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
