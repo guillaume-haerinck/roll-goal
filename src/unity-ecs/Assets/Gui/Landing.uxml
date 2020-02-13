@@ -1,0 +1,8 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
+    <ui:Button text="Button">
+        <Style src="Landing.uss" />
+    </ui:Button>
+    <ui:Label text="Hello world" name="Label">
+        <Style src="Landing.uss" />
+    </ui:Label>
+</ui:UXML>
